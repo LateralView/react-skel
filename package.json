@@ -1,0 +1,29 @@
+{
+  "name": "react-skel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "React Skeleton to start Building Applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LateralView/React-skel.git"
+  },
+  "keywords": [
+    "React",
+    "Skeleton",
+    "Redux",
+    "Saga"
+  ],
+  "author": "Nahuel A. Veron <nahuelav96@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LateralView/React-skel/issues"
+  },
+  "homepage": "https://github.com/LateralView/React-skel#readme",
+  "devDependencies": {
+    "webpack": "^2.2.1"
+  }
+}
