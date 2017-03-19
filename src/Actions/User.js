@@ -1,6 +1,8 @@
 import { ResolvedActionFactory, RejectedActionFactory } from './utils'
 
 export const types = {
+  LOGOUT_INTENT: 'LOGOUT_INTENT',
+
   AUTHENTICATE_INTENT: 'AUTHENTICATE_INTENT',
   AUTHENTICATE_INTENT_RESOLVED: 'AUTHENTICATE_INTENT_RESOLVED',
   AUTHENTICATE_INTENT_REJECTED: 'AUTHENTICATE_INTENT_REJECTED',
@@ -19,6 +21,13 @@ export const types = {
 }
 
 export const actions = {
+  /**
+   * Generates an Logout Action
+   */
+  Logout() {
+    return { type: types.LOGOUT_INTENT }
+  },
+
   /**
    * Generates an Authentication Action
    * @param {string} email - Email to log into the application
