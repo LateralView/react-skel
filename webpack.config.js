@@ -11,10 +11,12 @@ const APP_DIR = path.resolve(__dirname, 'src')
  */
 const getPlugins = () => {
   let plugins = []
+  const isSecure = process.env.IS_HTTPS ? 'https' : 'http'
 
   // Set up the environment variable
   plugins.push(new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development')
+    'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'),
+    'process.env.API_URL': JSON.stringify(`${isSecure}://${process.env.API_URL || 'localhost'}:${process.env.API_PORT}/api`)
   }))
 
   if (isProduction) {
