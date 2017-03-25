@@ -1,0 +1,23 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+html,
+body,
+body #reactinit,
+body #reactinit > div[data-reactroot] {
+  width: 100%;
+  height: 100%;
+}
+
+body > #__REACT__INIT__ > div[data-reactroot] {
+  display: flex;
+  flex-direction: column;
+}

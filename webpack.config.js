@@ -6,18 +6,24 @@ const isProduction = process.argv.indexOf('-p') !== -1
 const BUILD_DIR = path.resolve(__dirname, 'dist')
 const APP_DIR = path.resolve(__dirname, 'src')
 
+const extractCSS = new ExtractTextPlugin({
+  filename: '[name].css',
+  allChunks: true,
+  disable: !isProduction
+})
+
 /**
  * Conditionally get plugins based on the environment
  */
 const getPlugins = () => {
-  let plugins = []
   const isSecure = process.env.IS_HTTPS ? 'https' : 'http'
-
-  // Set up the environment variable
-  plugins.push(new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'),
-    'process.env.API_URL': JSON.stringify(`${isSecure}://${process.env.API_URL || 'localhost'}:${process.env.API_PORT}/api`)
-  }))
+  let plugins = [
+    extractCSS,
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'),
+      'process.env.API_URL': JSON.stringify(`${isSecure}://${process.env.API_URL || 'localhost'}:${process.env.API_PORT || 8085}/api`)
+    })
+  ]
 
   if (isProduction) {
     plugins.push(new webpack.optimize.UglifyJsPlugin())
@@ -26,6 +32,7 @@ const getPlugins = () => {
 
   else {
     plugins.push(new webpack.HotModuleReplacementPlugin())
+    plugins.push(new webpack.NamedModulesPlugin())
   }
   
   return plugins
@@ -33,7 +40,7 @@ const getPlugins = () => {
 
 module.exports = {
   // Don't directly expose sourcemaps on production
-  devtool: isProduction ? 'hidden-source-map' : 'eval-source-map',
+  devtool: isProduction ? 'hidden-source-map' : 'inline-source-map',
   // webpack-dev-server configurations
   devServer: {
     contentBase: BUILD_DIR,
@@ -121,6 +128,46 @@ module.exports = {
               failOnError: true,
               fix: true
             }
+          }
+        ]
+      },
+      {
+        test: /\.(scss|css)$/,
+        use: extractCSS.extract({
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+                modules: true,
+                camelCase: true,
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                importLoaders: 2
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: { sourceMap: 'inline' }
+            },
+            {
+              loader: 'sass-loader',
+              options: { sourceMap: true }
+            }
+          ],
+          fallback: { loader: 'style-loader', options: { sourceMap: true } }
+        })
+      },
+      {
+        test: /\.css/,
+        include: APP_DIR,
+        use: [
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true }
+          },
+          {
+            loader: 'postcss-loader',
+            options: { sourceMap: 'inline' }
           }
         ]
       }

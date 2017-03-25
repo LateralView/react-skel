@@ -1,0 +1,24 @@
+.parentContainer {
+  min-height: 56px;
+}
+
+.avatarContainer {
+  display: flex;
+}
+
+.namesContainer {
+  margin-left: 10px;
+}
+
+.name {
+  margin: 5px 0;
+  font-weight: 300;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
