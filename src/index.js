@@ -16,6 +16,8 @@ import AuthMiddleware from './Middlewares/AuthMiddleware'
 import Login from './Components/Login'
 import Home from './Components/Home'
 import Header from './Components/Header'
+import Register from './Components/Register'
+import Notifications from './Components/Notifications'
 
 const __store = store()
 const __auth_midleware = new AuthMiddleware(__store, '/', '/login', state => !!state.User.token)
@@ -29,10 +31,12 @@ ReactDOM.render((
   <Provider store={__store}>
     <MuiThemeProvider muiTheme={getMuiTheme(baseTheme)}>
       <div>
+        <Notifications />
         <Header />
         <Router history={syncHistoryWithStore(browserHistory, __store)}>
           <Route path='/' component={Home} onEnter={__auth_midleware.OnlyLoggedIn()} />
           <Route path='/login' component={Login} onEnter={__auth_midleware.OnlyLoggedOut()} />
+          <Route path='/register' component={Register} onEnter={__auth_midleware.OnlyLoggedOut} />
         </Router>
       </div>
     </MuiThemeProvider>

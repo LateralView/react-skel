@@ -61,6 +61,7 @@ module.exports = {
   entry: {
     bundle: [
       'babel-polyfill',
+      'whatwg-fetch',
       APP_DIR + '/index.js',
       APP_DIR + '/index.html'
     ]
