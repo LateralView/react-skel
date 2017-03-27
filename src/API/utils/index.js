@@ -19,3 +19,21 @@ export const HeaderFactory = token => {
   if (token) headers.append('x-access-token', token)
   return headers
 }
+
+/**
+ * Handle Gracefully an HTTP Error
+ * @param {Error} error - Fetch Error
+ */
+export function* ErrorHandler(error) {
+  const genericResponse = { message: 'Something Went Wrong, try again later' }
+  if (error && error.json) {
+    try {
+      const data = yield error.json()
+      return data
+    }
+    catch(e) {
+      return genericResponse
+    }
+  }
+  else return genericResponse
+}

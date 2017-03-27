@@ -1,4 +1,5 @@
 import { Authenticate } from '../API/User'
+import { ErrorHandler } from '../API/utils'
 import { replace } from 'react-router-redux'
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { actions, types } from '../Actions/User'
@@ -19,10 +20,9 @@ function* loginHandler({data}) {
     else throw res
   }
   catch(e) {
-    // Dispatch a error.
-    const errmsg = yield e.json()
-    yield put(NotificationActions.OpenNotification('Snap, something went wrong', 1500))
-    yield put(actions.AuthenticateRejected(e, errmsg))
+    const response = yield ErrorHandler(e)
+    yield put(NotificationActions.OpenNotification(response.message, 1500))
+    yield put(actions.AuthenticateRejected(e, response))
   }
 }
 
