@@ -21,6 +21,8 @@ export default class LoginForm extends React.Component {
     this.state = {
       email: '',
       password: '',
+      firstname: '',
+      lastname: '',
       validations: this._validateInputs()
     }
   }
@@ -105,7 +107,9 @@ export default class LoginForm extends React.Component {
   _submit() {
     this.props.onSubmit({
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      firstname: this.state.firstname,
+      lastname: this.state.lastname
     })
   }
 

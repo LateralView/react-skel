@@ -60,12 +60,15 @@ export const actions = {
 
   /**
    * Generates an User Create Action
-   * @param {object} data - Data required to create an user
+   * @param {string} email - Email of the new user
+   * @param {string} password - Password of the new user
+   * @param {string} firstname - first name of the new user
+   * @param {string} lastname - last name of the new user
    */
-  UserCreate(data) {
+  UserCreate(email, password, firstname, lastname) {
     return {
       type: types.USER_CREATE_INTENT,
-      data
+      data: { email, password, firstname, lastname }
     }
   },
 

@@ -13,8 +13,8 @@ class Register extends React.Component {
     onRegister: React.PropTypes.func
   }
   static mapDispatchToProps = dispatch => ({
-    onLogin({email, password}) {
-      //dispatch(actions.Authenticate(email, password))
+    onRegister({email, password, firstname, lastname}) {
+      dispatch(actions.UserCreate(email, password, firstname, lastname))
     },
     onBack() {
       dispatch(goBack())
