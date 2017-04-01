@@ -83,13 +83,6 @@ module.exports = {
         }]
       },
       {
-        test: /\.modernizrrc(\.json)?$/,
-        use: [
-          { loader: 'modernizr-loader'},
-          { loader: 'json-loader' }
-        ]
-      },
-      {
         test: /index.html/,
         use: [{
           loader: 'file-loader', 
@@ -177,11 +170,9 @@ module.exports = {
   plugins: getPlugins(),
   resolve: {
     // Alias ~ as the base dir, so you don't need to do the infamous '../../../' on definitions
-    // Modernizr needs to resolve to the 'modernizrrc.json' file
     // The sinon file is replaced with the real source file, that is why we use the import loader
     alias: {
       '~': path.resolve(APP_DIR),
-      modernizr$: path.resolve(__dirname, 'modernizrrc.json'),
       sinon: 'sinon/pkg/sinon.js'
     },
     // Allow us to use peerDependencies on library packages

@@ -7,6 +7,9 @@ dist
 # VSCODE
 .vscode
 
+# WebStorm
+.idea
+
 # Logs
 logs
 *.log
