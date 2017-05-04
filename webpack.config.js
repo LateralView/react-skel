@@ -25,12 +25,7 @@ const getPlugins = () => {
     })
   ]
 
-  if (isProduction) {
-    plugins.push(new webpack.optimize.UglifyJsPlugin())
-    plugins.push(new webpack.optimize.DedupePlugin())
-  }
-
-  else {
+  if (!isProduction) {
     plugins.push(new webpack.HotModuleReplacementPlugin())
     plugins.push(new webpack.NamedModulesPlugin())
   }
@@ -70,7 +65,8 @@ module.exports = {
   output: {
     path: BUILD_DIR,
     filename: '[name].js',
-    chunkFilename: '[name].js'
+    chunkFilename: '[name].js',
+    publicPath: '',
   },
   module: {
     // Set up loaders to process your files
