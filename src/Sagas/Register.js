@@ -1,5 +1,4 @@
 import { Create } from '../API/User'
-import { replace } from 'react-router-redux'
 import { ErrorHandler } from '../API/utils'
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { actions, types } from '../Actions/User'
@@ -16,7 +15,6 @@ function* userCreationHandler({ data }) {
           1500
         )
       )
-      yield put(replace('/'))
     } else throw res
   } catch (e) {
     const response = yield ErrorHandler(e)

@@ -69,10 +69,9 @@ module.exports = {
     // Set up loaders to process your files
     rules: [
       {
-        test: /index.html/,
+        test: /index\.(html|prod\.html)$/,
         use: [
           {
-            test: /index\.(html|prod\.html)$/,
             loader: 'file-loader',
             options: {
               name: 'index.html'

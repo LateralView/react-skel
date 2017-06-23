@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import mdl from 'material-icons/css/material-icons.css'
 
 import Avatar from 'material-ui/Avatar'
@@ -9,7 +10,7 @@ import style from './style.scss'
 
 export default class UserInfo extends React.Component {
   static propTypes = {
-    user: React.PropTypes.object
+    user: PropTypes.object
   }
 
   static defaultProps = {

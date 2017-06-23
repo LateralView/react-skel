@@ -7,7 +7,8 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack",
-    "e2e": "webdriver-manager update && webdriver-manager startprotractor protractor.conf.js"
+    "test": "jest",
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -24,17 +25,30 @@
   "bugs": {
     "url": "https://github.com/LateralView/React-skel/issues"
   },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add",
+      "npm test -- --lastCommit"
+    ]
+  },
   "homepage": "https://github.com/LateralView/React-skel#readme",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^7.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "chai": "^4.0.2",
     "css-loader": "^0.28.4",
+    "enzyme": "^2.9.0",
+    "enzyme-to-json": "^1.5.1",
     "eslint": "^4.0.0",
     "eslint-config-prettier": "^2.2.0",
     "eslint-loader": "^1.8.0",
@@ -43,8 +57,11 @@
     "eslint-plugin-react": "^7.1.0",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
+    "husky": "^0.14.0",
     "image-webpack-loader": "^3.3.1",
     "imports-loader": "^0.7.1",
+    "jest": "^20.0.4",
+    "lint-staged": "^4.0.0",
     "node-sass": "^4.5.3",
     "node-uuid": "^1.4.8",
     "postcss-cssnext": "^2.11.0",
@@ -53,6 +70,7 @@
     "prettier": "^1.4.4",
     "react-dom": "^15.6.1",
     "react-hot-loader": "^1.3.1",
+    "react-test-renderer": "^15.6.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0",
@@ -63,10 +81,10 @@
     "material-icons": "^0.1.0",
     "material-ui": "^0.18.3",
     "normalize.css": "^7.0.0",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-redux": "^5.0.5",
-    "react-router": "^4.1.1",
-    "react-router-redux": "^4.0.8",
+    "react-router-dom": "^4.1.1",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-saga": "^0.15.4"

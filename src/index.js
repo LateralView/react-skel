@@ -4,28 +4,20 @@ import store from './store'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import { syncHistoryWithStore } from 'react-router-redux'
-import { Router, Route, browserHistory } from 'react-router'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-
-import AuthMiddleware from './Middlewares/AuthMiddleware'
 
 import Login from './Components/Login'
 import Home from './Components/Home'
 import Header from './Components/Header'
 import Register from './Components/Register'
 import Notifications from './Components/Notifications'
+import { PrivateRoute, OnlyPublicRoute } from './Components/Routing'
 
 const __store = store()
-const __auth_midleware = new AuthMiddleware(
-  __store,
-  '/',
-  '/login',
-  state => !!state.User.token
-)
 const __init_el = document.createElement('div')
 __init_el.id = style.reactinit
 
@@ -37,22 +29,12 @@ ReactDOM.render(
       <div>
         <Notifications />
         <Header />
-        <Router history={syncHistoryWithStore(browserHistory, __store)}>
-          <Route
-            path="/"
-            component={Home}
-            onEnter={__auth_midleware.OnlyLoggedIn()}
-          />
-          <Route
-            path="/login"
-            component={Login}
-            onEnter={__auth_midleware.OnlyLoggedOut()}
-          />
-          <Route
-            path="/register"
-            component={Register}
-            onEnter={__auth_midleware.OnlyLoggedOut}
-          />
+        <Router>
+          <div>
+            <PrivateRoute path="/" component={Home} />
+            <OnlyPublicRoute path="/login" component={Login} />
+            <OnlyPublicRoute path="/register" component={Register} />
+          </div>
         </Router>
       </div>
     </MuiThemeProvider>

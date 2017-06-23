@@ -1,6 +1,5 @@
 import { Authenticate } from '../API/User'
 import { ErrorHandler } from '../API/utils'
-import { replace } from 'react-router-redux'
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { actions, types } from '../Actions/User'
 import { actions as NotificationActions } from '../Actions/Notifications'
@@ -15,7 +14,6 @@ function* loginHandler({ data }) {
     // Check if res.status ~ 200
     if (res.ok) {
       yield put(actions.AuthenticateResolved(res, yield res.json()))
-      yield put(replace('/'))
     } else throw res
   } catch (e) {
     const response = yield ErrorHandler(e)
@@ -24,14 +22,6 @@ function* loginHandler({ data }) {
   }
 }
 
-/**
- * Handles Logout
- */
-function* logoutHandler() {
-  yield put(replace('/login'))
-}
-
 export default function*() {
   yield takeLatest(types.AUTHENTICATE_INTENT, loginHandler)
-  yield takeLatest(types.LOGOUT_INTENT, logoutHandler)
 }

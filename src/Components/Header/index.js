@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { actions } from '../../Actions/User'
 
@@ -11,10 +12,10 @@ import MenuItem from 'material-ui/MenuItem'
 
 class Header extends React.Component {
   static propTypes = {
-    user: React.PropTypes.object,
-    loggedIn: React.PropTypes.bool,
-    onEdit: React.PropTypes.func,
-    onLogout: React.PropTypes.func
+    user: PropTypes.object,
+    loggedIn: PropTypes.bool,
+    onEdit: PropTypes.func,
+    onLogout: PropTypes.func
   }
   static mapStateToProps = state => ({
     user: state.User.user,

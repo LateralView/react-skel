@@ -1,7 +1,8 @@
 import style from './style.scss'
 import React from 'react'
+import PropTypes from 'prop-types'
 import LoginForm from './LoginForm'
-import { push } from 'react-router-redux'
+import { withRouter } from 'react-router-dom'
 import { actions } from '../../Actions/User'
 import { connect } from 'react-redux'
 import { Card, CardTitle, CardText } from 'material-ui/Card'
@@ -9,17 +10,24 @@ import { Card, CardTitle, CardText } from 'material-ui/Card'
 class Login extends React.Component {
   static mapStateToProps = () => ({})
   static propTypes = {
-    onLogin: React.PropTypes.func,
-    onRegister: React.PropTypes.func
+    onLogin: PropTypes.func,
+    onRegister: PropTypes.func,
+    history: PropTypes.object.isRequired
   }
   static mapDispatchToProps = dispatch => ({
     onLogin({ email, password }) {
       dispatch(actions.Authenticate(email, password))
-    },
-    onRegister() {
-      dispatch(push('/register'))
     }
   })
+
+  constructor() {
+    super()
+    this._register = this._register.bind(this)
+  }
+
+  _register() {
+    this.props.history.push('/register')
+  }
 
   render() {
     return (
@@ -29,7 +37,7 @@ class Login extends React.Component {
           <CardText>
             <LoginForm
               onSubmit={this.props.onLogin}
-              onRegisterPressed={this.props.onRegister}
+              onRegisterPressed={this._register}
             />
           </CardText>
         </Card>
@@ -38,4 +46,6 @@ class Login extends React.Component {
   }
 }
 
-export default connect(Login.mapStateToProps, Login.mapDispatchToProps)(Login)
+export default withRouter(
+  connect(Login.mapStateToProps, Login.mapDispatchToProps)(Login)
+)

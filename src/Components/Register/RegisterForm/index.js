@@ -1,12 +1,13 @@
 import style from './style.scss'
 import React from 'react'
+import PropTypes from 'prop-types'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 
 export default class LoginForm extends React.Component {
   static propTypes = {
-    onBack: React.PropTypes.func,
-    onSubmit: React.PropTypes.func
+    onBack: PropTypes.func,
+    onSubmit: PropTypes.func
   }
 
   constructor() {

@@ -1,9 +1,7 @@
 import Saga from './Sagas'
 import Reducers from './Reducers'
 import createSagaMiddleware from 'redux-saga'
-import { browserHistory } from 'react-router'
 import UserStorage from './Middlewares/UserStorage'
-import { routerMiddleware } from 'react-router-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 
 const UserStorageMiddleware = new UserStorage('__USER__')
@@ -18,11 +16,7 @@ export default () => {
     Reducers,
     UserStorageMiddleware.InitialState(),
     composeEnhanced(
-      applyMiddleware(
-        sagaMiddleware,
-        UserStorageMiddleware.Middleware(),
-        routerMiddleware(browserHistory)
-      )
+      applyMiddleware(sagaMiddleware, UserStorageMiddleware.Middleware())
     )
   )
 

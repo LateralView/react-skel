@@ -1,13 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { actions } from '../../Actions/Notifications'
 import Snackbar from 'material-ui/Snackbar'
 
 class Notifications extends React.Component {
   static propTypes = {
-    Notifications: React.PropTypes.array,
-    OnNotificationTimeout: React.PropTypes.func,
-    OnActionTap: React.PropTypes.func
+    Notifications: PropTypes.array,
+    OnNotificationTimeout: PropTypes.func,
+    OnActionTap: PropTypes.func
   }
 
   static mapStateToProps = state => ({
