@@ -20,25 +20,42 @@ import Register from './Components/Register'
 import Notifications from './Components/Notifications'
 
 const __store = store()
-const __auth_midleware = new AuthMiddleware(__store, '/', '/login', state => !!state.User.token)
+const __auth_midleware = new AuthMiddleware(
+  __store,
+  '/',
+  '/login',
+  state => !!state.User.token
+)
 const __init_el = document.createElement('div')
 __init_el.id = style.reactinit
 
 injectTapEventPlugin()
 
-
-ReactDOM.render((
+ReactDOM.render(
   <Provider store={__store}>
     <MuiThemeProvider muiTheme={getMuiTheme(baseTheme)}>
       <div>
         <Notifications />
         <Header />
         <Router history={syncHistoryWithStore(browserHistory, __store)}>
-          <Route path='/' component={Home} onEnter={__auth_midleware.OnlyLoggedIn()} />
-          <Route path='/login' component={Login} onEnter={__auth_midleware.OnlyLoggedOut()} />
-          <Route path='/register' component={Register} onEnter={__auth_midleware.OnlyLoggedOut} />
+          <Route
+            path="/"
+            component={Home}
+            onEnter={__auth_midleware.OnlyLoggedIn()}
+          />
+          <Route
+            path="/login"
+            component={Login}
+            onEnter={__auth_midleware.OnlyLoggedOut()}
+          />
+          <Route
+            path="/register"
+            component={Register}
+            onEnter={__auth_midleware.OnlyLoggedOut}
+          />
         </Router>
       </div>
     </MuiThemeProvider>
-  </Provider>
-), document.body.appendChild(__init_el))
+  </Provider>,
+  document.body.appendChild(__init_el)
+)

@@ -9,7 +9,7 @@ export const Authenticate = (email, password) => {
   return fetch(`${process.env.API_URL}/users/authenticate`, {
     method: METHODS.POST,
     headers: HeaderFactory(),
-    body: JSON.stringify({email, password})
+    body: JSON.stringify({ email, password })
   })
 }
 

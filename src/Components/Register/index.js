@@ -13,7 +13,7 @@ class Register extends React.Component {
     onRegister: React.PropTypes.func
   }
   static mapDispatchToProps = dispatch => ({
-    onRegister({email, password, firstname, lastname}) {
+    onRegister({ email, password, firstname, lastname }) {
       dispatch(actions.UserCreate(email, password, firstname, lastname))
     },
     onBack() {
@@ -25,10 +25,7 @@ class Register extends React.Component {
     return (
       <div className={style.parentView}>
         <Card>
-          <CardTitle 
-            title='Register'
-            subtitle='Register a New Account'
-          />
+          <CardTitle title="Register" subtitle="Register a New Account" />
           <CardText>
             <LoginForm
               onBack={this.props.onBack}
@@ -41,4 +38,6 @@ class Register extends React.Component {
   }
 }
 
-export default connect(Register.mapStateToProps, Register.mapDispatchToProps)(Register)
+export default connect(Register.mapStateToProps, Register.mapDispatchToProps)(
+  Register
+)

@@ -30,10 +30,8 @@ export function* ErrorHandler(error) {
     try {
       const data = yield error.json()
       return data
-    }
-    catch(e) {
+    } catch (e) {
       return genericResponse
     }
-  }
-  else return genericResponse
+  } else return genericResponse
 }

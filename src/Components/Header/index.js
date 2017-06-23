@@ -39,20 +39,23 @@ class Header extends React.Component {
           docked={false}
           width={250}
           open={this.state.drawer && this.props.loggedIn}
-          onRequestChange={(drawer) => this.setState({drawer})}
+          onRequestChange={drawer => this.setState({ drawer })}
         >
-          <UserInfo user={this.props.user}></UserInfo>
+          <UserInfo user={this.props.user} />
           <Divider />
           <MenuItem onTouchTap={this.props.onEdit}>Edit User</MenuItem>
           <MenuItem onTouchTap={this.props.onLogout}>Logout</MenuItem>
         </Drawer>
         <AppBar
-          title='React Skeleton'
-          onLeftIconButtonTouchTap={() => this.setState({drawer: !this.state.drawer})}
+          title="React Skeleton"
+          onLeftIconButtonTouchTap={() =>
+            this.setState({ drawer: !this.state.drawer })}
         />
       </div>
     )
   }
 }
 
-export default connect(Header.mapStateToProps, Header.mapDispatchToProps)(Header)
+export default connect(Header.mapStateToProps, Header.mapDispatchToProps)(
+  Header
+)

@@ -13,7 +13,7 @@ class Login extends React.Component {
     onRegister: React.PropTypes.func
   }
   static mapDispatchToProps = dispatch => ({
-    onLogin({email, password}) {
+    onLogin({ email, password }) {
       dispatch(actions.Authenticate(email, password))
     },
     onRegister() {
@@ -25,12 +25,9 @@ class Login extends React.Component {
     return (
       <div className={style.parentView}>
         <Card>
-          <CardTitle 
-            title='Login'
-            subtitle='Log in With your SKEL Account'
-          />
+          <CardTitle title="Login" subtitle="Log in With your SKEL Account" />
           <CardText>
-            <LoginForm 
+            <LoginForm
               onSubmit={this.props.onLogin}
               onRegisterPressed={this.props.onRegister}
             />

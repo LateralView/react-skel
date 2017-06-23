@@ -24,17 +24,25 @@ class Notifications extends React.Component {
   })
 
   render() {
-    return <div>{this.props.Notifications
-      .map(notif => <Snackbar
-        key={notif._id}
-        open={notif._open}
-        message={notif.message}
-        action={notif.actionMessage || null}
-        autoHideDuration={notif.autoHideDuration || 1500}
-        onRequestClose={() => this.props.OnNotificationTimeout(notif._id)}
-        onActionTouchTap={() => this.props.OnActionTap(notif._id)}
-      />)}</div>
+    return (
+      <div>
+        {this.props.Notifications.map(notif =>
+          <Snackbar
+            key={notif._id}
+            open={notif._open}
+            message={notif.message}
+            action={notif.actionMessage || null}
+            autoHideDuration={notif.autoHideDuration || 1500}
+            onRequestClose={() => this.props.OnNotificationTimeout(notif._id)}
+            onActionTouchTap={() => this.props.OnActionTap(notif._id)}
+          />
+        )}
+      </div>
+    )
   }
 }
 
-export default connect(Notifications.mapStateToProps, Notifications.mapDispatchToProps)(Notifications)
+export default connect(
+  Notifications.mapStateToProps,
+  Notifications.mapDispatchToProps
+)(Notifications)

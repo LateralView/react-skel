@@ -13,12 +13,10 @@ export default class {
         return {
           User: parsedState
         }
-      }
-      catch (e) {
+      } catch (e) {
         return {}
       }
-    }
-    else return {}
+    } else return {}
   }
 
   Middleware() {
@@ -27,15 +25,11 @@ export default class {
         let result = next(action)
         localStorage.setItem(this.key, JSON.stringify(store.getState().User))
         return result
-      }
-
-      else if (action.type === types.LOGOUT_INTENT) {
+      } else if (action.type === types.LOGOUT_INTENT) {
         let result = next(action)
         localStorage.removeItem(this.key)
         return result
-      }
-
-      else return next(action)
+      } else return next(action)
     }
   }
 }

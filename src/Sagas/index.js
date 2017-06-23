@@ -4,9 +4,5 @@ import Notifications from './Notifications'
 import Register from './Register'
 
 export default function*() {
-  yield [
-    fork(Login),
-    fork(Register),
-    fork(Notifications)
-  ]
+  yield [fork(Login), fork(Register), fork(Notifications)]
 }

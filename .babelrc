@@ -1,10 +1,4 @@
 {
-  "presets": ["react", "es2015"],
-  "plugins": ["transform-object-rest-spread", "transform-class-properties", 
-    ["istanbul", {
-      "exclude": [
-        "**/*.spec.js"
-      ]}
-    ]
-  ]
+  "presets": ["react", "es2015", "stage-0"],
+  "plugins": ["transform-runtime"]
 }

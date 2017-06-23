@@ -48,9 +48,10 @@ export default class LoginForm extends React.Component {
    * @param {string} email - Email Input
    * @return {boolean} - Input is Valid
    */
-  _validateEmail (email = '') {
+  _validateEmail(email = '') {
     if (email === '') return { valid: false, text: '' }
-    else if (!/\S+@\S+\.\S+/.test(email)) return { valid: false, text: 'This is not a valid email' }
+    else if (!/\S+@\S+\.\S+/.test(email))
+      return { valid: false, text: 'This is not a valid email' }
     else return { valid: true, text: '' }
   }
 
@@ -61,7 +62,8 @@ export default class LoginForm extends React.Component {
    */
   _validatePassword(password = '') {
     if (password === '') return { valid: false, text: '' }
-    else if (password.length < 5) return { valid: false, text: 'The password is too short' }
+    else if (password.length < 5)
+      return { valid: false, text: 'The password is too short' }
     else return { valid: true, text: '' }
   }
 
@@ -72,7 +74,8 @@ export default class LoginForm extends React.Component {
    */
   _validateFirstName(firstname = '') {
     if (firstname === '') return { valid: false, text: '' }
-    else if (firstname.length < 3) return { valid: false, text: 'The First Name is too short'}
+    else if (firstname.length < 3)
+      return { valid: false, text: 'The First Name is too short' }
     else return { valid: true, text: '' }
   }
 
@@ -83,7 +86,8 @@ export default class LoginForm extends React.Component {
    */
   _validateLastName(lastname = '') {
     if (lastname === '') return { valid: false, text: '' }
-    else if (lastname.length < 3) return { valid: false, text: 'The Last Name is too short'}
+    else if (lastname.length < 3)
+      return { valid: false, text: 'The Last Name is too short' }
     else return { valid: true, text: '' }
   }
 
@@ -93,13 +97,18 @@ export default class LoginForm extends React.Component {
    * @param {*} password - Password Used
    */
   _updateInputs(email, password, firstname, lastname) {
-    const validations = this._validateInputs(email, password, firstname, lastname)
+    const validations = this._validateInputs(
+      email,
+      password,
+      firstname,
+      lastname
+    )
     this.setState({
       email,
       password,
       firstname,
       lastname,
-      validations, 
+      validations,
       isValid: Object.keys(validations).every(key => validations[key].valid)
     })
   }
@@ -118,49 +127,69 @@ export default class LoginForm extends React.Component {
       <section>
         <article>
           <TextField
-            hintText='Complete it with your email account'
-            floatingLabelText='Email'
-            type='email'
+            hintText="Complete it with your email account"
+            floatingLabelText="Email"
+            type="email"
             value={this.state.email}
-            onChange={(evt, val) => this._updateInputs(val, this.state.password, this.state.firstname, this.state.lastname)}
+            onChange={(evt, val) =>
+              this._updateInputs(
+                val,
+                this.state.password,
+                this.state.firstname,
+                this.state.lastname
+              )}
             errorText={this.state.validations.email.text}
             fullWidth
           />
           <TextField
-            hintText='Complete it with your password'
-            floatingLabelText='Password'
-            type='password'
+            hintText="Complete it with your password"
+            floatingLabelText="Password"
+            type="password"
             value={this.state.password}
-            onChange={(evt, val) => this._updateInputs(this.state.email, val, this.state.firstname, this.state.lastname)}
+            onChange={(evt, val) =>
+              this._updateInputs(
+                this.state.email,
+                val,
+                this.state.firstname,
+                this.state.lastname
+              )}
             errorText={this.state.validations.password.text}
             fullWidth
           />
           <TextField
-            hintText='Complete it with your First Name'
-            floatingLabelText='First Name'
-            type='text'
+            hintText="Complete it with your First Name"
+            floatingLabelText="First Name"
+            type="text"
             value={this.state.firstname}
-            onChange={(evt, val) => this._updateInputs(this.state.email, this.state.password, val, this.state.lastname)}
+            onChange={(evt, val) =>
+              this._updateInputs(
+                this.state.email,
+                this.state.password,
+                val,
+                this.state.lastname
+              )}
             errorText={this.state.validations.firstname.text}
             fullWidth
           />
           <TextField
-            hintText='Complete it with your Last Name'
-            floatingLabelText='Last Name'
-            type='text'
+            hintText="Complete it with your Last Name"
+            floatingLabelText="Last Name"
+            type="text"
             value={this.state.lastname}
-            onChange={(evt, val) => this._updateInputs(this.state.email, this.state.password, this.state.firstname, val)}
+            onChange={(evt, val) =>
+              this._updateInputs(
+                this.state.email,
+                this.state.password,
+                this.state.firstname,
+                val
+              )}
             errorText={this.state.validations.lastname.text}
             fullWidth
           />
         </article>
         <article className={style.buttonContainer}>
-          <FlatButton 
-            label="Back"
-            onTouchTap={this.props.onBack}
-            primary
-          />
-          <FlatButton 
+          <FlatButton label="Back" onTouchTap={this.props.onBack} primary />
+          <FlatButton
             label="Register Account"
             disabled={!this.state.isValid}
             onTouchTap={this._submit}

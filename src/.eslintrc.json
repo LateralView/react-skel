@@ -1,14 +1,19 @@
 {
   "env": {
     "browser": true,
-    "commonjs": true,
     "es6": true,
-    "node": true,
-    "protractor": true,
-    "mocha": true
+    "jest/globals": true
   },
-  "plugins": ["react"],
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "plugins": [
+    "jest",
+    "react",
+    "prettier"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:jest/recommended",
+    "plugin:react/recommended"
+  ],
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
@@ -22,24 +27,16 @@
     }
   },
   "rules": {
-    "indent": [
-      "error",
-      2
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "never"
-    ],
-    "no-warning-comments": 1,
-    "no-unused-vars": 1,
-    "no-console": 1
+    "no-extra-semi": 0,
+    "no-mixed-spaces-and-tabs": 0,
+    "jest/valid-expect": 0,
+    "linebreak-style": ["error", "unix"],
+    "prettier/prettier": [
+      "warn",
+      {
+        "singleQuote": true,
+        "semi": false
+      }
+    ]
   }
 }

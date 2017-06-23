@@ -40,9 +40,10 @@ export default class LoginForm extends React.Component {
    * @param {string} email - Email Input
    * @return {boolean} - Input is Valid
    */
-  _validateEmail (email = '') {
+  _validateEmail(email = '') {
     if (email === '') return { valid: false, text: '' }
-    else if (!/\S+@\S+\.\S+/.test(email)) return { valid: false, text: 'This is not a valid email' }
+    else if (!/\S+@\S+\.\S+/.test(email))
+      return { valid: false, text: 'This is not a valid email' }
     else return { valid: true, text: '' }
   }
 
@@ -53,7 +54,8 @@ export default class LoginForm extends React.Component {
    */
   _validatePassword(password = '') {
     if (password === '') return { valid: false, text: '' }
-    else if (password.length < 5) return { valid: false, text: 'The password is too short' }
+    else if (password.length < 5)
+      return { valid: false, text: 'The password is too short' }
     else return { valid: true, text: '' }
   }
 
@@ -67,7 +69,7 @@ export default class LoginForm extends React.Component {
     this.setState({
       email,
       password,
-      validations, 
+      validations,
       isValid: Object.keys(validations).every(key => validations[key].valid)
     })
   }
@@ -84,18 +86,19 @@ export default class LoginForm extends React.Component {
       <section>
         <article>
           <TextField
-            hintText='Complete it with your email account'
-            floatingLabelText='Email'
-            type='email'
+            hintText="Complete it with your email account"
+            floatingLabelText="Email"
+            type="email"
             value={this.state.email}
-            onChange={(evt, val) => this._updateInputs(val, this.state.password)}
+            onChange={(evt, val) =>
+              this._updateInputs(val, this.state.password)}
             errorText={this.state.validations.email.text}
             fullWidth
           />
           <TextField
-            hintText='Complete it with your password'
-            floatingLabelText='Password'
-            type='password'
+            hintText="Complete it with your password"
+            floatingLabelText="Password"
+            type="password"
             value={this.state.password}
             onChange={(evt, val) => this._updateInputs(this.state.email, val)}
             errorText={this.state.validations.password.text}
@@ -103,12 +106,12 @@ export default class LoginForm extends React.Component {
           />
         </article>
         <article className={style.buttonContainer}>
-          <FlatButton 
+          <FlatButton
             label="Register New Account"
             onTouchTap={this.props.onRegisterPressed}
             primary
           />
-          <FlatButton 
+          <FlatButton
             label="Log In"
             disabled={!this.state.isValid}
             onTouchTap={this._submit}

@@ -17,20 +17,22 @@ export default class UserInfo extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div className={style.parentContainer}>
         <ListItem
           disabled={true}
           leftAvatar={
             <div className={style.avatarContainer}>
-              <Avatar icon={<FontIcon className={`${mdl.mi} ${mdl.miPerson}`} />} />
+              <Avatar
+                icon={<FontIcon className={`${mdl.mi} ${mdl.miPerson}`} />}
+              />
               <div className={style.namesContainer}>
                 <p className={style.name}>{this.props.user.firstname}</p>
                 <p className={style.name}>{this.props.user.lastname}</p>
               </div>
             </div>
           }
-        ></ListItem>
+        />
       </div>
     )
   }
