@@ -28,8 +28,12 @@ export default class UserInfo extends React.Component {
                 icon={<FontIcon className={`${mdl.mi} ${mdl.miPerson}`} />}
               />
               <div className={style.namesContainer}>
-                <p className={style.name}>{this.props.user.firstname}</p>
-                <p className={style.name}>{this.props.user.lastname}</p>
+                <p className={style.name}>
+                  {this.props.user.firstname}
+                </p>
+                <p className={style.name}>
+                  {this.props.user.lastname}
+                </p>
               </div>
             </div>
           }
