@@ -5,7 +5,7 @@ import LoginForm from './RegisterForm'
 import { withRouter } from 'react-router-dom'
 import { actions } from '../../Actions/User'
 import { connect } from 'react-redux'
-import { Card, CardTitle, CardText } from 'material-ui/Card'
+import { Card, CardTitle, CardText } from 'react-toolbox/lib/card'
 
 class Register extends React.Component {
   static mapStateToProps = () => ({})
@@ -14,14 +14,21 @@ class Register extends React.Component {
     onRegister: PropTypes.func,
     history: PropTypes.object.isRequired
   }
+
+  constructor() {
+    super()
+    this._goBack = this._goBack.bind(this)
+  }
+
   static mapDispatchToProps = dispatch => ({
     onRegister({ email, password, firstname, lastname }) {
       dispatch(actions.UserCreate(email, password, firstname, lastname))
-    },
-    onBack() {
-      dispatch(this.props.history.goBack())
     }
   })
+
+  _goBack() {
+    this.props.history.goBack()
+  }
 
   render() {
     return (
@@ -29,10 +36,7 @@ class Register extends React.Component {
         <Card>
           <CardTitle title="Register" subtitle="Register a New Account" />
           <CardText>
-            <LoginForm
-              onBack={this.props.onBack}
-              onSubmit={this.props.onRegister}
-            />
+            <LoginForm onBack={this._goBack} onSubmit={this.props.onRegister} />
           </CardText>
         </Card>
       </div>

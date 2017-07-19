@@ -1,8 +1,9 @@
 import style from './style.scss'
 import React from 'react'
 import PropTypes from 'prop-types'
-import TextField from 'material-ui/TextField'
-import FlatButton from 'material-ui/FlatButton'
+
+import Input from 'react-toolbox/lib/input'
+import { Button } from 'react-toolbox/lib/button'
 
 export default class LoginForm extends React.Component {
   static propTypes = {
@@ -86,36 +87,33 @@ export default class LoginForm extends React.Component {
     return (
       <section>
         <article>
-          <TextField
-            hintText="Complete it with your email account"
-            floatingLabelText="Email"
+          <Input
+            label="Email"
             type="email"
+            hint="Complete it with your email account"
             value={this.state.email}
-            onChange={(evt, val) =>
-              this._updateInputs(val, this.state.password)}
-            errorText={this.state.validations.email.text}
-            fullWidth
+            onChange={val => this._updateInputs(val, this.state.password)}
+            error={this.state.validations.email.text}
           />
-          <TextField
-            hintText="Complete it with your password"
-            floatingLabelText="Password"
+          <Input
+            label="Password"
             type="password"
+            hint="Complete it with your password"
             value={this.state.password}
-            onChange={(evt, val) => this._updateInputs(this.state.email, val)}
-            errorText={this.state.validations.password.text}
-            fullWidth
+            onChange={val => this._updateInputs(this.state.email, val)}
+            error={this.state.validations.password.text}
           />
         </article>
         <article className={style.buttonContainer}>
-          <FlatButton
+          <Button
             label="Register New Account"
-            onTouchTap={this.props.onRegisterPressed}
+            onClick={this.props.onRegisterPressed}
             primary
           />
-          <FlatButton
+          <Button
             label="Log In"
             disabled={!this.state.isValid}
-            onTouchTap={this._submit}
+            onClick={this._submit}
             primary
           />
         </article>

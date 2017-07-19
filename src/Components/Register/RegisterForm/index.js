@@ -1,8 +1,8 @@
 import style from './style.scss'
 import React from 'react'
 import PropTypes from 'prop-types'
-import TextField from 'material-ui/TextField'
-import FlatButton from 'material-ui/FlatButton'
+import Input from 'react-toolbox/lib/input'
+import { Button } from 'react-toolbox/lib/button'
 
 export default class LoginForm extends React.Component {
   static propTypes = {
@@ -127,73 +127,69 @@ export default class LoginForm extends React.Component {
     return (
       <section>
         <article>
-          <TextField
-            hintText="Complete it with your email account"
-            floatingLabelText="Email"
+          <Input
+            hint="Complete it with your email account"
+            label="Email"
             type="email"
             value={this.state.email}
-            onChange={(evt, val) =>
+            onChange={val =>
               this._updateInputs(
                 val,
                 this.state.password,
                 this.state.firstname,
                 this.state.lastname
               )}
-            errorText={this.state.validations.email.text}
-            fullWidth
+            error={this.state.validations.email.text}
           />
-          <TextField
-            hintText="Complete it with your password"
-            floatingLabelText="Password"
+          <Input
+            label="Password"
             type="password"
+            hint="Complete it with your password"
             value={this.state.password}
-            onChange={(evt, val) =>
+            onChange={val =>
               this._updateInputs(
                 this.state.email,
                 val,
                 this.state.firstname,
                 this.state.lastname
               )}
-            errorText={this.state.validations.password.text}
-            fullWidth
+            error={this.state.validations.password.text}
           />
-          <TextField
-            hintText="Complete it with your First Name"
-            floatingLabelText="First Name"
+          <Input
+            label="First Name"
             type="text"
+            hint="Complete it with your First Name"
             value={this.state.firstname}
-            onChange={(evt, val) =>
+            error={this.state.validations.firstname.text}
+            onChange={val =>
               this._updateInputs(
                 this.state.email,
                 this.state.password,
                 val,
                 this.state.lastname
               )}
-            errorText={this.state.validations.firstname.text}
-            fullWidth
           />
-          <TextField
-            hintText="Complete it with your Last Name"
-            floatingLabelText="Last Name"
+          <Input
+            label="Last Name"
             type="text"
+            hint="Complete it with your Last Name"
             value={this.state.lastname}
-            onChange={(evt, val) =>
+            onChange={val =>
               this._updateInputs(
                 this.state.email,
                 this.state.password,
                 this.state.firstname,
                 val
               )}
-            errorText={this.state.validations.lastname.text}
-            fullWidth
+            error={this.state.validations.lastname.text}
           />
         </article>
         <article className={style.buttonContainer}>
-          <FlatButton label="Back" onTouchTap={this.props.onBack} primary />
-          <FlatButton
+          <Button label="Back" onClick={this.props.onBack} primary />
+          <Button
             label="Register Account"
             disabled={!this.state.isValid}
-            onTouchTap={this._submit}
+            onClick={this._submit}
             primary
           />
         </article>

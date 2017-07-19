@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { actions } from '../../Actions/Notifications'
-import Snackbar from 'material-ui/Snackbar'
+import { Snackbar } from 'react-toolbox'
 
 class Notifications extends React.Component {
   static propTypes = {
@@ -30,13 +30,14 @@ class Notifications extends React.Component {
         {this.props.Notifications.map(notif =>
           <Snackbar
             key={notif._id}
-            open={notif._open}
-            message={notif.message}
+            active={notif._open}
             action={notif.actionMessage || null}
-            autoHideDuration={notif.autoHideDuration || 1500}
-            onRequestClose={() => this.props.OnNotificationTimeout(notif._id)}
-            onActionTouchTap={() => this.props.OnActionTap(notif._id)}
-          />
+            timeout={notif.autoHideDuration || 1500}
+            onClick={() => this.props.OnActionTap(notif._id)}
+            onTimeout={() => this.props.OnNotificationTimeout(notif._id)}
+          >
+            {notif.message}
+          </Snackbar>
         )}
       </div>
     )

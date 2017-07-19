@@ -5,10 +5,9 @@ import { actions } from '../../Actions/User'
 
 import UserInfo from './UserInfo'
 
-import AppBar from 'material-ui/AppBar'
-import Drawer from 'material-ui/Drawer'
-import Divider from 'material-ui/Divider'
-import MenuItem from 'material-ui/MenuItem'
+import AppBar from 'react-toolbox/lib/app_bar'
+import Drawer from 'react-toolbox/lib/drawer'
+import { MenuItem, MenuDivider } from 'react-toolbox/lib/menu'
 
 class Header extends React.Component {
   static propTypes = {
@@ -37,20 +36,18 @@ class Header extends React.Component {
     return (
       <div>
         <Drawer
-          docked={false}
-          width={250}
-          open={this.state.drawer && this.props.loggedIn}
-          onRequestChange={drawer => this.setState({ drawer })}
+          active={this.state.drawer}
+          onOverlayClick={() => this.setState({ drawer: !this.state.drawer })}
         >
           <UserInfo user={this.props.user} />
-          <Divider />
-          <MenuItem onTouchTap={this.props.onEdit}>Edit User</MenuItem>
-          <MenuItem onTouchTap={this.props.onLogout}>Logout</MenuItem>
+          <MenuDivider />
+          <MenuItem onClick={this.props.onEdit}>Edit User</MenuItem>
+          <MenuItem onClick={this.props.onLogout}>Logout</MenuItem>
         </Drawer>
         <AppBar
           title="React Skeleton"
-          onLeftIconButtonTouchTap={() =>
-            this.setState({ drawer: !this.state.drawer })}
+          leftIcon={this.props.loggedIn ? 'menu' : null}
+          onLeftIconClick={() => this.setState({ drawer: !this.state.drawer })}
         />
       </div>
     )
