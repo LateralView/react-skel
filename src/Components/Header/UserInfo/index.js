@@ -20,8 +20,12 @@ export default class UserInfo extends React.Component {
         <div className={style.avatarContainer}>
           <Avatar icon={<FontIcon value="person" />} />
           <div className={style.namesContainer}>
-            <p className={style.name}>{this.props.user.firstname}</p>
-            <p className={style.name}>{this.props.user.lastname}</p>
+            <p className={style.name}>
+              {this.props.user.firstname}
+            </p>
+            <p className={style.name}>
+              {this.props.user.lastname}
+            </p>
           </div>
         </div>
       </div>

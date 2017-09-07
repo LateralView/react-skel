@@ -14,7 +14,7 @@ export const actions = {
    * @param {string} actionMessage - Action Message that can be clicked
    * @param {function} actionMethod - Action To Do
    */
-  OpenNotification(message, autoHide = 1500, actionMessage, actionMethod) {
+  OpenNotification(message, autoHide = 3000, actionMessage, actionMethod) {
     return {
       type: types.NOTIFICATION_OPENED,
       notification: {

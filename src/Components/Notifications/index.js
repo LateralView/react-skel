@@ -32,7 +32,7 @@ class Notifications extends React.Component {
             key={notif._id}
             active={notif._open}
             action={notif.actionMessage || null}
-            timeout={notif.autoHideDuration || 1500}
+            timeout={notif.autoHide}
             onClick={() => this.props.OnActionTap(notif._id)}
             onTimeout={() => this.props.OnNotificationTimeout(notif._id)}
           >

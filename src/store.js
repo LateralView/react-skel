@@ -6,10 +6,11 @@ import { createStore, applyMiddleware, compose } from 'redux'
 
 const UserStorageMiddleware = new UserStorage('__USER__')
 const sagaMiddleware = createSagaMiddleware()
-const composeEnhanced = process.env.NODE_ENV === 'development' &&
+const composeEnhanced =
+  process.env.NODE_ENV === 'development' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  : compose
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : compose
 
 export default () => {
   const store = createStore(
