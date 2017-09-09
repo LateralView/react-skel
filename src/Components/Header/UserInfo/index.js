@@ -6,12 +6,12 @@ import Avatar from 'react-toolbox/lib/avatar'
 import FontIcon from 'react-toolbox/lib/font_icon'
 
 export default class UserInfo extends React.Component {
-  static propTypes = {
-    user: PropTypes.object
+  static get propTypes() {
+    return { user: PropTypes.object }
   }
 
-  static defaultProps = {
-    user: {}
+  static get defaultProps() {
+    return { user: {} }
   }
 
   render() {
@@ -20,12 +20,8 @@ export default class UserInfo extends React.Component {
         <div className={style.avatarContainer}>
           <Avatar icon={<FontIcon value="person" />} />
           <div className={style.namesContainer}>
-            <p className={style.name}>
-              {this.props.user.firstname}
-            </p>
-            <p className={style.name}>
-              {this.props.user.lastname}
-            </p>
+            <p className={style.name}>{this.props.user.firstname}</p>
+            <p className={style.name}>{this.props.user.lastname}</p>
           </div>
         </div>
       </div>

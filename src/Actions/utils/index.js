@@ -5,7 +5,7 @@
  * @param {object} payload - Response Body
  */
 export const ResolvedActionFactory = (type, response, payload) => ({
-  type,
+  type: `${type}_RESOLVED`,
   response,
   payload
 })
@@ -17,7 +17,7 @@ export const ResolvedActionFactory = (type, response, payload) => ({
  * @param {object} payload - Response Body
  */
 export const RejectedActionFactory = (type, error, payload) => ({
-  type,
+  type: `${type}_REJECTED`,
   error,
   payload
 })

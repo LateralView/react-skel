@@ -5,9 +5,11 @@ import Input from 'react-toolbox/lib/input'
 import { Button } from 'react-toolbox/lib/button'
 
 export default class LoginForm extends React.Component {
-  static propTypes = {
-    onBack: PropTypes.func,
-    onSubmit: PropTypes.func
+  static get propTypes() {
+    return {
+      onBack: PropTypes.func,
+      onSubmit: PropTypes.func
+    }
   }
 
   constructor() {

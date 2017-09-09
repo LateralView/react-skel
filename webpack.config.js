@@ -16,7 +16,6 @@ const extractCSS = new ExtractTextPlugin({
  * Conditionally get plugins based on the environment
  */
 const getPlugins = () => {
-  const isSecure = process.env.IS_HTTPS ? 'https' : 'http'
   let plugins = [
     extractCSS,
     new webpack.DefinePlugin({
@@ -39,7 +38,7 @@ const getPlugins = () => {
 
 module.exports = {
   // Don't directly expose sourcemaps on production
-  devtool: isProduction ? 'hidden-source-map' : 'inline-source-map',
+  devtool: isProduction ? false : 'inline-source-map',
   // webpack-dev-server configurations
   devServer: {
     contentBase: BUILD_DIR,
@@ -100,17 +99,7 @@ module.exports = {
       {
         test: /\.jsx?/,
         include: APP_DIR,
-        use: [
-          { loader: 'react-hot-loader' },
-          { loader: 'babel-loader' },
-          {
-            loader: 'eslint-loader',
-            options: {
-              failOnError: true,
-              fix: true
-            }
-          }
-        ]
+        use: [{ loader: 'react-hot-loader' }, { loader: 'babel-loader' }]
       },
       {
         test: /\.(scss|css)$/,

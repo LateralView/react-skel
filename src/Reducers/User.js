@@ -2,7 +2,7 @@ import { types } from '../Actions/User'
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case types.AUTHENTICATE_INTENT_RESOLVED:
+    case `${types.LOGOUT_INTENT}_RESOLVED`:
       return {
         ...state,
         ...action.payload
