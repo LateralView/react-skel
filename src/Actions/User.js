@@ -136,3 +136,8 @@ export const actions = {
     return RejectedActionFactory(types.USER_ACTIVATE_INTENT, error, payload)
   }
 }
+
+export const selectors = {
+  GetUser: state => state.User,
+  GetToken: state => state.User.token
+}
