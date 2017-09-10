@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Snackbar } from 'react-toolbox'
+import Snackbar from 'react-toolbox/lib/snackbar'
 
 export default class Notifications extends React.Component {
   static get propTypes() {
