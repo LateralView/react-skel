@@ -5,7 +5,8 @@
   "description": "React Skeleton to start Building Applications",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "node index.js",
+    "dev": "webpack-dev-server",
     "build": "webpack -p",
     "test": "jest",
     "precommit": "lint-staged"
@@ -68,8 +69,14 @@
     "webpack-dev-server": "^2.8.2"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-polyfill": "^6.26.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "helmet": "^3.9.0",
     "material-icons": "^0.1.0",
+    "md5": "^2.2.1",
+    "mongoose": "^4.12.3",
     "normalize.css": "^7.0.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",

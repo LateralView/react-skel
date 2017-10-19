@@ -1,0 +1,20 @@
+version: '2.1'
+
+services:
+  db:
+    image: mongo
+    ports:
+      - "27017"
+  app:
+    build: .
+    ports:
+      - "${APP_PORT:-3000}:${APP_PORT:-3000}"
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./doc:/usr/src/app/doc
+      - ./dist:/usr/src/app/dist
+    environment:
+      APP_PORT: "${APP_PORT:-3000}"
+      DB_URL: "mongodb://db:27017/spotifyzier"
+    links:
+      - "db"
