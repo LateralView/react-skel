@@ -99,10 +99,17 @@ module.exports = {
       {
         test: /\.jsx?/,
         include: APP_DIR,
-        use: [{ loader: 'react-hot-loader' }, { loader: 'babel-loader' }]
+        use: [
+          { loader: 'react-hot-loader/webpack' },
+          { loader: 'babel-loader' }
+        ]
       },
       {
-        test: /\.(scss|css)$/,
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.scss$/,
         use: extractCSS.extract({
           use: [
             {
