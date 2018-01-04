@@ -69,7 +69,10 @@
   },
   "dependencies": {
     "antd": "^3.1.0",
+    "babel-plugin-lodash": "^3.3.2",
     "babel-polyfill": "^6.26.0",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
     "material-icons": "^0.1.0",
     "normalize.css": "^7.0.0",
     "prop-types": "^15.6.0",
@@ -80,6 +83,9 @@
     "react-toolbox": "^2.0.0-beta.12",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
+    "semantic-ui-less": "^2.2.12",
+    "semantic-ui-react": "^0.77.1",
+    "webpack-bundle-analyzer": "^2.9.1",
     "whatwg-fetch": "^2.0.3"
   },
   "theme": "./src/Styles/antTheme.js"

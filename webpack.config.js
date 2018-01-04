@@ -1,6 +1,9 @@
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const analyze = !!process.env.ANALYZE_ENV
 
 const isProduction = process.argv.indexOf('-p') !== -1
 const BUILD_DIR = path.resolve(__dirname, 'dist')
@@ -27,6 +30,10 @@ const getPlugins = () => {
       )
     })
   ]
+
+  if (analyze) {
+    plugins.push(new BundleAnalyzerPlugin())
+  }
 
   if (!isProduction) {
     plugins.push(new webpack.HotModuleReplacementPlugin())
@@ -135,6 +142,12 @@ module.exports = {
         })
       },
       {
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader', 'less-loader']
+        }),
+        test: /\.less$/
+      },
+      {
         test: /\.css/,
         include: APP_DIR,
         use: [
@@ -147,12 +160,20 @@ module.exports = {
             options: { sourceMap: 'inline' }
           }
         ]
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file-loader?name=public/[name].[ext]'
       }
     ]
   },
   plugins: getPlugins(),
   resolve: {
     // Allow us to use peerDependencies on library packages
+    extensions: ['.js', '.jsx'],
+    alias: {
+      '../../theme.config$': path.join(__dirname, 'semanticui/theme.config')
+    },
     modules: [path.join(__dirname, 'node_modules')]
   }
 }
