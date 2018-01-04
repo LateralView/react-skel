@@ -1,7 +1,7 @@
 module.exports = () => {
   return {
-    'primary-color': 'red',
+    'primary-color': '#ff6d18',
     'link-color': '#1DA57A',
-    'border-radius-base': '2px'
+    'border-radius-base': '20px'
   }
 }

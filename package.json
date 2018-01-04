@@ -28,8 +28,7 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "git add",
-      "npm test -- --lastCommit"
+      "git add"
     ]
   },
   "homepage": "https://github.com/LateralView/React-skel#readme",
