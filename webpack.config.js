@@ -1,9 +1,6 @@
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const analyze = !!process.env.ANALYZE_ENV
 
 const isProduction = process.argv.indexOf('-p') !== -1
 const BUILD_DIR = path.resolve(__dirname, 'dist')
@@ -30,10 +27,6 @@ const getPlugins = () => {
       )
     })
   ]
-
-  if (analyze) {
-    plugins.push(new BundleAnalyzerPlugin())
-  }
 
   if (!isProduction) {
     plugins.push(new webpack.HotModuleReplacementPlugin())
@@ -112,10 +105,6 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      },
-      {
         test: /\.scss$/,
         use: extractCSS.extract({
           use: [
@@ -142,10 +131,23 @@ module.exports = {
         })
       },
       {
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'less-loader']
-        }),
-        test: /\.less$/
+        test: /\.less$/,
+        use: extractCSS.extract({
+          use: [
+            {
+              loader: 'css-loader'
+            },
+            {
+              loader: 'postcss-loader',
+              options: { sourceMap: 'inline' }
+            },
+            {
+              loader: 'less-loader',
+              options: { sourceMap: true }
+            }
+          ],
+          fallback: { loader: 'style-loader', options: { sourceMap: true } }
+        })
       },
       {
         test: /\.css/,
@@ -172,7 +174,7 @@ module.exports = {
     // Allow us to use peerDependencies on library packages
     extensions: ['.js', '.jsx'],
     alias: {
-      '../../theme.config$': path.join(__dirname, 'semanticui/theme.config')
+      '../../theme.config$': path.join(__dirname, 'src/semanticui/theme.config')
     },
     modules: [path.join(__dirname, 'node_modules')]
   }

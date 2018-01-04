@@ -1,8 +1,7 @@
 import style from './index.scss'
 import React from 'react'
 import store from './store'
-import '../semanticui/semantic.less'
-// import 'semantic-ui-less/semantic.less'
+import './semanticui/semantic.less'
 
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'

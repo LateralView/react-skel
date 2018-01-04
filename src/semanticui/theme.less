@@ -1,0 +1,40 @@
+/*******************************
+        Import Directives
+*******************************/
+
+/*------------------
+       Theme
+-------------------*/
+
+@theme: @@element;
+
+/*--------------------
+   Site Variables
+---------------------*/
+
+/* Site theme site.variables */
+@import (optional) "@{siteFolder}/globals/site.variables";
+
+/* Site theme elements */
+@import (optional) "@{siteFolder}/elements/button.variables";
+
+/*******************************
+             Mix-ins
+*******************************/
+
+/*------------------
+       Fonts
+-------------------*/
+
+// .loadFonts() when (@importGoogleFonts) {
+//   @import url('@{googleProtocol}fonts.googleapis.com/css?family=@{googleFontRequest}');
+// }
+
+/*------------------
+     Overrides
+-------------------*/
+
+// .loadUIOverrides() {
+//   @import (optional) "@{themesFolder}/@{theme}/@{type}s/@{element}.overrides";
+//   @import (optional) "@{siteFolder}/@{type}s/@{element}.overrides";
+// }
