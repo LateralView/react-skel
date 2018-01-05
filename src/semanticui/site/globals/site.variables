@@ -1,5 +1,11 @@
+/*******************************
+         Site Settings
+*******************************/
+
 /*-------------------
-   Global Variables
+       Fonts
 --------------------*/
 
-@primaryColor: green;
+@headerFont       : 'Courgette', Helvetica, sans-serif;
+@pageFont         : 'Courgette', Helvetica, sans-serif;
+@googleFontFamily : 'Courgette:400';

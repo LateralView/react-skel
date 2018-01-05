@@ -1,40 +1,58 @@
-/*******************************
-        Import Directives
-*******************************/
-
-/*------------------
-       Theme
--------------------*/
-
-@theme: @@element;
-
 /*--------------------
    Site Variables
 ---------------------*/
 
-/* Site theme site.variables */
+/* Global */
+@import (optional) "@{siteFolder}/globals/reset.variables";
 @import (optional) "@{siteFolder}/globals/site.variables";
 
-/* Site theme elements */
+/* Elements */
 @import (optional) "@{siteFolder}/elements/button.variables";
+@import (optional) "@{siteFolder}/elements/container.variables";
+@import (optional) "@{siteFolder}/elements/divider.variables";
+@import (optional) "@{siteFolder}/elements/flag.variables";
+@import (optional) "@{siteFolder}/elements/header.variables";
+@import (optional) "@{siteFolder}/elements/icon.variables";
+@import (optional) "@{siteFolder}/elements/image.variables";
+@import (optional) "@{siteFolder}/elements/input.variables";
+@import (optional) "@{siteFolder}/elements/label.variables";
+@import (optional) "@{siteFolder}/elements/list.variables";
+@import (optional) "@{siteFolder}/elements/loader.variables";
+@import (optional) "@{siteFolder}/elements/rail.variables";
+@import (optional) "@{siteFolder}/elements/reveal.variables";
+@import (optional) "@{siteFolder}/elements/segment.variables";
+@import (optional) "@{siteFolder}/elements/step.variables";
 
-/*******************************
-             Mix-ins
-*******************************/
+/* Collections */
+@import (optional) "@{siteFolder}/collections/breadcrumb.variables";
+@import (optional) "@{siteFolder}/collections/form.variables";
+@import (optional) "@{siteFolder}/collections/grid.variables";
+@import (optional) "@{siteFolder}/collections/menu.variables";
+@import (optional) "@{siteFolder}/collections/message.variables";
+@import (optional) "@{siteFolder}/collections/table.variables";
 
-/*------------------
-       Fonts
--------------------*/
+/* Views */
+@import (optional) "@{siteFolder}/views/ad.variables";
+@import (optional) "@{siteFolder}/views/card.variables";
+@import (optional) "@{siteFolder}/views/comment.variables";
+@import (optional) "@{siteFolder}/views/feed.variables";
+@import (optional) "@{siteFolder}/views/item.variables";
+@import (optional) "@{siteFolder}/views/statistic.variables";
 
-// .loadFonts() when (@importGoogleFonts) {
-//   @import url('@{googleProtocol}fonts.googleapis.com/css?family=@{googleFontRequest}');
-// }
-
-/*------------------
-     Overrides
--------------------*/
-
-// .loadUIOverrides() {
-//   @import (optional) "@{themesFolder}/@{theme}/@{type}s/@{element}.overrides";
-//   @import (optional) "@{siteFolder}/@{type}s/@{element}.overrides";
-// }
+/* Modules */
+@import (optional) "@{siteFolder}/modules/accordion.variables";
+@import (optional) "@{siteFolder}/modules/checkbox.variables";
+@import (optional) "@{siteFolder}/modules/dimmer.variables";
+@import (optional) "@{siteFolder}/modules/dropdown.variables";
+@import (optional) "@{siteFolder}/modules/embed.variables";
+@import (optional) "@{siteFolder}/modules/modal.variables";
+@import (optional) "@{siteFolder}/modules/nag.variables";
+@import (optional) "@{siteFolder}/modules/popup.variables";
+@import (optional) "@{siteFolder}/modules/progress.variables";
+@import (optional) "@{siteFolder}/modules/rating.variables";
+@import (optional) "@{siteFolder}/modules/search.variables";
+@import (optional) "@{siteFolder}/modules/shape.variables";
+@import (optional) "@{siteFolder}/modules/sidebar.variables";
+@import (optional) "@{siteFolder}/modules/sticky.variables";
+@import (optional) "@{siteFolder}/modules/tab.variables";
+@import (optional) "@{siteFolder}/modules/transition.variables";
