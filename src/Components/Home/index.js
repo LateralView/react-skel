@@ -13,11 +13,10 @@ import {
 const ThemingLayout = () => (
   <Container style={{ marginTop: '3em' }}>
     <Header as="h1">Theming Examples</Header>
-
+    Hola
     <Header as="h2" dividing>
       Site
     </Header>
-
     <Grid columns={3} stackable>
       <Grid.Column>
         <Header as="h1">Heading 1</Header>
@@ -101,11 +100,9 @@ const ThemingLayout = () => (
         </Grid>
       </Grid.Column>
     </Grid>
-
     <Header as="h2" dividing>
       Menu
     </Header>
-
     <Grid columns={3} doubling>
       <Grid.Column>
         <Menu
@@ -147,11 +144,9 @@ const ThemingLayout = () => (
         />
       </Grid.Column>
     </Grid>
-
     <Header as="h2" dividing>
       Buttons
     </Header>
-
     <Grid columns="equal">
       <Grid.Column>
         <Button>Default</Button>

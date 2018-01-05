@@ -104,16 +104,12 @@ module.exports = {
         ]
       },
       {
-        test: /\.jsx?/,
+        test: /\.(js|jsx)$/,
         include: APP_DIR,
         use: [
           { loader: 'react-hot-loader/webpack' },
           { loader: 'babel-loader' }
         ]
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.scss$/,
@@ -142,10 +138,18 @@ module.exports = {
         })
       },
       {
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'less-loader']
-        }),
-        test: /\.less$/
+        test: /\.less/,
+        use: extractCSS.extract({
+          use: [
+            {
+              loader: 'css-loader'
+            },
+            {
+              loader: 'less-loader'
+            }
+          ],
+          fallback: { loader: 'style-loader', options: { sourceMap: true } }
+        })
       },
       {
         test: /\.css/,
@@ -163,7 +167,7 @@ module.exports = {
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
-        loader: 'file-loader?name=public/[name].[ext]'
+        loader: 'file-loader?name=[name].[ext]'
       }
     ]
   },

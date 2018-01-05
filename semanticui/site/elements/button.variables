@@ -1,0 +1,6 @@
+@backgroundColor: yellow;
+
+@primaryColor:  orange;
+@secondaryColor: #333;
+
+@fontWeight: bold;
