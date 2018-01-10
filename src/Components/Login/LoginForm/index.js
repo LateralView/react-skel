@@ -3,6 +3,10 @@ import PropTypes from 'prop-types'
 import { Button, Input, Icon, Label, Form } from 'semantic-ui-react'
 
 import style from './style.scss'
+import {
+  validateEmail,
+  validatePassword
+} from '../../../Shared/Utils/validations'
 
 export default class LoginForm extends React.Component {
   static propTypes = {
@@ -14,50 +18,19 @@ export default class LoginForm extends React.Component {
     super()
     this._submit = this._submit.bind(this)
     this._updateInputs = this._updateInputs.bind(this)
-    this._validateEmail = this._validateEmail.bind(this)
-    this._validateInputs = this._validateInputs.bind(this)
-    this._validatePassword = this._validatePassword.bind(this)
     this.state = {
       email: '',
-      password: '',
-      validations: this._validateInputs()
+      password: ''
     }
   }
 
-  /**
-   * Update validations of the inputs
-   * @param {string} email - Email Value
-   * @param {string} password - Password Value
-   */
-  _validateInputs(email = '', password = '') {
-    return {
-      email: this._validateEmail(email),
-      password: this._validatePassword(password)
-    }
-  }
-
-  /**
-   * Validate Email Text
-   * @param {string} email - Email Input
-   * @return {boolean} - Input is Valid
-   */
-  _validateEmail(email = '') {
-    if (email === '') return { valid: false, text: '' }
-    else if (!/\S+@\S+\.\S+/.test(email))
-      return { valid: false, text: 'This is not a valid email' }
-    else return { valid: true, text: '' }
-  }
-
-  /**
-   * Validate Password Text
-   * @param {string} password - Password Code
-   * @return {boolean} - Input is Valid
-   */
-  _validatePassword(password = '') {
-    if (password === '') return { valid: false, text: '' }
-    else if (password.length < 5)
-      return { valid: false, text: 'The password is too short' }
-    else return { valid: true, text: '' }
+  isValid = () => {
+    return (
+      this.email &&
+      validateEmail(this.email) &&
+      this.password &&
+      validatePassword(this.password)
+    )
   }
 
   /**
@@ -66,20 +39,19 @@ export default class LoginForm extends React.Component {
    * @param {*} password
    */
   _updateInputs(email, password) {
-    const validations = this._validateInputs(email, password)
     this.setState({
       email,
-      password,
-      validations,
-      isValid: Object.keys(validations).every(key => validations[key].valid)
+      password
     })
   }
 
   _submit() {
-    this.props.onSubmit({
-      email: this.state.email,
-      password: this.state.password
-    })
+    if (this.isValid()) {
+      this.props.onSubmit({
+        email: this.state.email,
+        password: this.state.password
+      })
+    }
   }
 
   render() {
@@ -95,14 +67,14 @@ export default class LoginForm extends React.Component {
               onChange={val =>
                 this._updateInputs(val.target.value, this.state.password)
               }
-              error={!!this.state.validations.email.text}
+              error={!validateEmail(this.state.email)}
             >
               <Icon name="at" />
               <input />
             </Input>
-            {!!this.state.validations.email.text && (
+            {!validateEmail(this.state.email) && (
               <Label basic color="red" pointing>
-                {this.state.validations.email.text}
+                This is not a valid email
               </Label>
             )}
           </Form.Field>
@@ -116,14 +88,14 @@ export default class LoginForm extends React.Component {
               onChange={val =>
                 this._updateInputs(this.state.email, val.target.value)
               }
-              error={!!this.state.validations.password.text}
+              error={!validatePassword(this.state.password)}
             >
               <Icon name="at" />
               <input />
             </Input>
-            {!!this.state.validations.password.text && (
+            {!validatePassword(this.state.password) && (
               <Label basic color="red" pointing>
-                {this.state.validations.password.text}
+                Password is too short
               </Label>
             )}
           </Form.Field>
