@@ -1,16 +1,13 @@
-import style from './style.scss'
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Button, Input, Icon, Label, Form } from 'semantic-ui-react'
 
-import Input from 'react-toolbox/lib/input'
-import { Button } from 'react-toolbox/lib/button'
+import style from './style.scss'
 
 export default class LoginForm extends React.Component {
-  static get propTypes() {
-    return {
-      onSubmit: PropTypes.func,
-      onRegisterPressed: PropTypes.func
-    }
+  static propTypes = {
+    onSubmit: PropTypes.func,
+    onRegisterPressed: PropTypes.func
   }
 
   constructor() {
@@ -64,9 +61,9 @@ export default class LoginForm extends React.Component {
   }
 
   /**
-   * 
+   *
    * @param {string} email - Email Used
-   * @param {*} password 
+   * @param {*} password
    */
   _updateInputs(email, password) {
     const validations = this._validateInputs(email, password)
@@ -89,31 +86,56 @@ export default class LoginForm extends React.Component {
     return (
       <section>
         <article>
-          <Input
-            label="Email"
-            type="email"
-            hint="Complete it with your email account"
-            value={this.state.email}
-            onChange={val => this._updateInputs(val, this.state.password)}
-            error={this.state.validations.email.text}
-          />
-          <Input
-            label="Password"
-            type="password"
-            hint="Complete it with your password"
-            value={this.state.password}
-            onChange={val => this._updateInputs(this.state.email, val)}
-            error={this.state.validations.password.text}
-          />
+          <Form.Field>
+            <Input
+              iconPosition="left"
+              placeholder="Complete it with your email account"
+              type="email"
+              value={this.state.email}
+              onChange={val =>
+                this._updateInputs(val.target.value, this.state.password)
+              }
+              error={!!this.state.validations.email.text}
+            >
+              <Icon name="at" />
+              <input />
+            </Input>
+            {!!this.state.validations.email.text && (
+              <Label basic color="red" pointing>
+                {this.state.validations.email.text}
+              </Label>
+            )}
+          </Form.Field>
+          <Form.Field>
+            <Input
+              iconPosition="left"
+              placeholder="Password"
+              type="password"
+              hint="Complete it with your password"
+              value={this.state.password}
+              onChange={val =>
+                this._updateInputs(this.state.email, val.target.value)
+              }
+              error={!!this.state.validations.password.text}
+            >
+              <Icon name="at" />
+              <input />
+            </Input>
+            {!!this.state.validations.password.text && (
+              <Label basic color="red" pointing>
+                {this.state.validations.password.text}
+              </Label>
+            )}
+          </Form.Field>
         </article>
+
         <article className={style.buttonContainer}>
           <Button
-            label="Register New Account"
+            content="Register New Account"
             onClick={this.props.onRegisterPressed}
-            primary
           />
           <Button
-            label="Log In"
+            content="Log In"
             disabled={!this.state.isValid}
             onClick={this._submit}
             primary

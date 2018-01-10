@@ -15,7 +15,8 @@ const onlyLoggedIn = ({ component: Component, user: User, ...rest }) => (
             state: { from: props.location }
           }}
         />
-      )}
+      )
+    }
   />
 )
 

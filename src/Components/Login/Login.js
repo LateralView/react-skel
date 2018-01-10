@@ -1,8 +1,7 @@
-import style from './style.scss'
 import React from 'react'
 import PropTypes from 'prop-types'
 import LoginForm from './LoginForm'
-import { Card, CardTitle, CardText } from 'react-toolbox/lib/card'
+import style from './style.scss'
 
 export default class Login extends React.Component {
   static get propTypes() {
@@ -25,15 +24,11 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className={style.parentView}>
-        <Card>
-          <CardTitle title="Login" subtitle="Log in With your SKEL Account" />
-          <CardText>
-            <LoginForm
-              onSubmit={this.props.onLogin}
-              onRegisterPressed={this._register}
-            />
-          </CardText>
-        </Card>
+        <h1>Login</h1>
+        <LoginForm
+          onSubmit={this.props.onLogin}
+          onRegisterPressed={this._register}
+        />
       </div>
     )
   }

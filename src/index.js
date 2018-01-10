@@ -7,11 +7,11 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-// import Login from './Components/Login'
+import Login from './Components/Login'
 import Home from './Components/Home'
-// import Register from './Components/Register'
+import Register from './Components/Register'
 // import Notifications from './Components/Notifications'
-import { OnlyPublicRoute } from './Components/Routing'
+import { OnlyPublicRoute, PrivateRoute } from './Components/Routing'
 
 const __store = store()
 const __init_el = document.createElement('div')
@@ -23,9 +23,9 @@ ReactDOM.render(
       {/* <Notifications /> */}
       <Router>
         <div>
-          <OnlyPublicRoute path="/" component={Home} />
-          {/* <OnlyPublicRoute path="/login" component={Login} />
-          <OnlyPublicRoute path="/register" component={Register} /> */}
+          <PrivateRoute path="/" exact component={Home} />
+          <OnlyPublicRoute path="/login" component={Login} />
+          <OnlyPublicRoute path="/register" component={Register} />
         </div>
       </Router>
     </div>
