@@ -23,17 +23,6 @@ export default class LoginForm extends React.Component {
       },
       formValidations: {}
     }
-
-    this.validations = this.validations.bind(this)
-  }
-
-  componentDidMount() {
-    // eslint-disable-next-line
-    console.log(this.state)
-
-    this.form.focus()
-    // eslint-disable-next-line
-    console.log(this.form)
   }
 
   handleChange = e => {
@@ -51,16 +40,16 @@ export default class LoginForm extends React.Component {
     })
   }
 
-  validations(e) {
+  validations = e => {
     const { name, value } = e.target
 
     function validation() {
       switch (name) {
         case 'email':
-          return validateEmail(value)
+          return !!value && validateEmail(value)
 
         case 'password':
-          return !!validatePassword(value)
+          return !!value && validatePassword(value)
 
         default:
           return {}
@@ -77,13 +66,11 @@ export default class LoginForm extends React.Component {
   }
 
   isValid = () => {
-    // TODO refactor so more simple
-    return (
-      this.state.formData.email &&
-      validateEmail(this.state.formData.email) &&
-      this.state.formData.password &&
-      validatePassword(this.state.formData.password)
+    const error = Object.values(this.state.formValidations).some(
+      el => el === false
     )
+
+    return !error
   }
 
   submit = () => {
@@ -113,7 +100,7 @@ export default class LoginForm extends React.Component {
               value={email}
               onChange={this.handleChange}
               error={!formValidations.email}
-              onBlur={e => this.validations(e)}
+              onBlur={this.validations}
               autoComplete="off"
             >
               <Icon name="at" />
@@ -135,10 +122,10 @@ export default class LoginForm extends React.Component {
               value={password}
               onChange={this.handleChange}
               error={formValidations.password === false}
-              onBlur={e => this.validations(e)}
+              onBlur={this.validations}
               autoComplete="off"
             >
-              <Icon name="at" />
+              <Icon name="key" />
               <input />
             </Input>
             {formValidations.password === false && (

@@ -9,5 +9,7 @@ export function validateEmail(email = '') {
 }
 
 export function validatePassword(pass = '') {
-  if (pass.length > 5) return true
+  if (pass.length > 5) {
+    return true
+  } else return false
 }
