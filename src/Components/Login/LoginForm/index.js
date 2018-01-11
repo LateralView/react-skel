@@ -14,47 +14,81 @@ export default class LoginForm extends React.Component {
     onRegisterPressed: PropTypes.func
   }
 
-  constructor() {
-    super()
-    this._submit = this._submit.bind(this)
-    this._updateInputs = this._updateInputs.bind(this)
+  constructor(props) {
+    super(props)
     this.state = {
-      email: '',
-      password: ''
+      formData: {
+        email: '',
+        password: ''
+      },
+      formValidations: {}
     }
+  }
+
+  handleChange = e => {
+    const value =
+      e.target.type === 'number' && e.target.value
+        ? Number(e.target.value)
+        : e.target.value
+
+    this.setState({
+      ...this.state,
+      formData: {
+        ...this.state.formData,
+        [e.target.name]: value
+      }
+    })
+  }
+
+  validations = e => {
+    const { name, value } = e.target
+
+    function validation() {
+      switch (name) {
+        case 'email':
+          return validateEmail(value)
+
+        case 'password':
+          return validatePassword(value)
+
+        default:
+          return {}
+      }
+    }
+
+    this.setState({
+      ...this.state,
+      formValidations: {
+        ...this.state.formValidations,
+        [name]: validation()
+      }
+    })
   }
 
   isValid = () => {
     return (
-      this.email &&
-      validateEmail(this.email) &&
-      this.password &&
-      validatePassword(this.password)
+      this.state.formData.email &&
+      validateEmail(this.state.formData.email) &&
+      this.state.formData.password &&
+      validatePassword(this.state.formData.password)
     )
   }
 
-  /**
-   *
-   * @param {string} email - Email Used
-   * @param {*} password
-   */
-  _updateInputs(email, password) {
-    this.setState({
-      email,
-      password
-    })
-  }
+  submit = () => {
+    const { email, password } = this.state
 
-  _submit() {
     if (this.isValid()) {
       this.props.onSubmit({
-        email: this.state.email,
-        password: this.state.password
+        email,
+        password
       })
     }
   }
 
   render() {
+    const { email, password } = this.state.formData
+    const { formValidations } = this.state
+
     return (
       <section>
         <article>
@@ -63,16 +97,16 @@ export default class LoginForm extends React.Component {
               iconPosition="left"
               placeholder="Complete it with your email account"
               type="email"
-              value={this.state.email}
-              onChange={val =>
-                this._updateInputs(val.target.value, this.state.password)
-              }
-              error={!validateEmail(this.state.email)}
+              name="email"
+              value={email}
+              onChange={this.handleChange}
+              error={!formValidations.email}
+              onBlur={this.validations}
             >
               <Icon name="at" />
               <input />
             </Input>
-            {!validateEmail(this.state.email) && (
+            {!formValidations.email && (
               <Label basic color="red" pointing>
                 This is not a valid email
               </Label>
@@ -83,17 +117,17 @@ export default class LoginForm extends React.Component {
               iconPosition="left"
               placeholder="Password"
               type="password"
+              name="password"
               hint="Complete it with your password"
-              value={this.state.password}
-              onChange={val =>
-                this._updateInputs(this.state.email, val.target.value)
-              }
-              error={!validatePassword(this.state.password)}
+              value={password}
+              onChange={this.handleChange}
+              error={!formValidations.password}
+              onBlur={this.validations}
             >
               <Icon name="at" />
               <input />
             </Input>
-            {!validatePassword(this.state.password) && (
+            {!formValidations.password && (
               <Label basic color="red" pointing>
                 Password is too short
               </Label>
@@ -108,8 +142,8 @@ export default class LoginForm extends React.Component {
           />
           <Button
             content="Log In"
-            disabled={!this.state.isValid}
-            onClick={this._submit}
+            disabled={!this.isValid()}
+            onClick={this.submit}
             primary
           />
         </article>
