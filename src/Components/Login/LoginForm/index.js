@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Input, Icon, Label, Form } from 'semantic-ui-react'
+import { Button, Input, Icon } from 'semantic-ui-react'
 
 import style from './style.scss'
 import {
   validateEmail,
   validatePassword
 } from '../../../Shared/Utils/validations'
+import FormField from '../../Shared/FormField'
 
 export default class LoginForm extends React.Component {
   static propTypes = {
@@ -73,7 +74,8 @@ export default class LoginForm extends React.Component {
     return !error
   }
 
-  submit = () => {
+  submit = e => {
+    e.preventDefault()
     const { email, password } = this.state
 
     if (this.isValid()) {
@@ -89,9 +91,13 @@ export default class LoginForm extends React.Component {
     const { formValidations } = this.state
 
     return (
-      <form ref={form => (this.form = form)}>
+      <form onSubmit={this.submit} noValidate>
         <article>
-          <Form.Field>
+          <FormField
+            errorText={
+              formValidations.email === false ? `This is not a valid email` : ''
+            }
+          >
             <Input
               iconPosition="left"
               placeholder="Complete it with your email account"
@@ -99,20 +105,21 @@ export default class LoginForm extends React.Component {
               name="email"
               value={email}
               onChange={this.handleChange}
-              error={!formValidations.email}
+              error={formValidations.email === false}
               onBlur={this.validations}
               autoComplete="off"
             >
               <Icon name="at" />
               <input />
             </Input>
-            {formValidations.email === false && (
-              <Label basic color="red" pointing>
-                This is not a valid email
-              </Label>
-            )}
-          </Form.Field>
-          <Form.Field>
+          </FormField>
+          <FormField
+            errorText={
+              formValidations.password === false
+                ? `The password is too short`
+                : ''
+            }
+          >
             <Input
               iconPosition="left"
               placeholder="Password"
@@ -128,23 +135,19 @@ export default class LoginForm extends React.Component {
               <Icon name="key" />
               <input />
             </Input>
-            {formValidations.password === false && (
-              <Label basic color="red" pointing>
-                Password is too short
-              </Label>
-            )}
-          </Form.Field>
+          </FormField>
         </article>
 
         <article className={style.buttonContainer}>
           <Button
             content="Register New Account"
             onClick={this.props.onRegisterPressed}
+            type="button"
           />
           <Button
             content="Log In"
             disabled={!this.isValid()}
-            onClick={this.submit}
+            type="submit"
             primary
           />
         </article>
