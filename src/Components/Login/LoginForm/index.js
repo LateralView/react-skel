@@ -23,6 +23,17 @@ export default class LoginForm extends React.Component {
       },
       formValidations: {}
     }
+
+    this.validations = this.validations.bind(this)
+  }
+
+  componentDidMount() {
+    // eslint-disable-next-line
+    console.log(this.state)
+
+    this.form.focus()
+    // eslint-disable-next-line
+    console.log(this.form)
   }
 
   handleChange = e => {
@@ -40,7 +51,7 @@ export default class LoginForm extends React.Component {
     })
   }
 
-  validations = e => {
+  validations(e) {
     const { name, value } = e.target
 
     function validation() {
@@ -49,7 +60,7 @@ export default class LoginForm extends React.Component {
           return validateEmail(value)
 
         case 'password':
-          return validatePassword(value)
+          return !!validatePassword(value)
 
         default:
           return {}
@@ -66,6 +77,7 @@ export default class LoginForm extends React.Component {
   }
 
   isValid = () => {
+    // TODO refactor so more simple
     return (
       this.state.formData.email &&
       validateEmail(this.state.formData.email) &&
@@ -90,7 +102,7 @@ export default class LoginForm extends React.Component {
     const { formValidations } = this.state
 
     return (
-      <section>
+      <form ref={form => (this.form = form)}>
         <article>
           <Form.Field>
             <Input
@@ -101,12 +113,13 @@ export default class LoginForm extends React.Component {
               value={email}
               onChange={this.handleChange}
               error={!formValidations.email}
-              onBlur={this.validations}
+              onBlur={e => this.validations(e)}
+              autoComplete="off"
             >
               <Icon name="at" />
               <input />
             </Input>
-            {!formValidations.email && (
+            {formValidations.email === false && (
               <Label basic color="red" pointing>
                 This is not a valid email
               </Label>
@@ -121,13 +134,14 @@ export default class LoginForm extends React.Component {
               hint="Complete it with your password"
               value={password}
               onChange={this.handleChange}
-              error={!formValidations.password}
-              onBlur={this.validations}
+              error={formValidations.password === false}
+              onBlur={e => this.validations(e)}
+              autoComplete="off"
             >
               <Icon name="at" />
               <input />
             </Input>
-            {!formValidations.password && (
+            {formValidations.password === false && (
               <Label basic color="red" pointing>
                 Password is too short
               </Label>
@@ -147,7 +161,7 @@ export default class LoginForm extends React.Component {
             primary
           />
         </article>
-      </section>
+      </form>
     )
   }
 }
