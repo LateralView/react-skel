@@ -19,16 +19,14 @@ __init_el.id = style.reactinit
 
 ReactDOM.render(
   <Provider store={__store}>
-    <div>
-      {/* <Notifications /> */}
-      <Router>
-        <div>
-          <PrivateRoute path="/" exact component={Home} />
-          <OnlyPublicRoute path="/login" component={Login} />
-          <OnlyPublicRoute path="/register" component={Register} />
-        </div>
-      </Router>
-    </div>
+    {/* <Notifications /> */}
+    <Router>
+      <div>
+        <PrivateRoute path="/" exact component={Home} />
+        <OnlyPublicRoute path="/login" component={Login} />
+        <OnlyPublicRoute path="/register" component={Register} />
+      </div>
+    </Router>
   </Provider>,
   document.body.appendChild(__init_el)
 )

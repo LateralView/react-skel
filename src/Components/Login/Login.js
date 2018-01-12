@@ -23,7 +23,7 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <div className={style.parentView}>
+      <div className={style.container}>
         <h1>Login</h1>
         <LoginForm
           onSubmit={this.props.onLogin}

@@ -18,9 +18,10 @@ body {
 html,
 body,
 body #reactinit,
-body #reactinit > div[data-reactroot] {
-  min-width: 100%;
-  min-height: 100%;
+body #reactinit > div,
+body #reactinit > div > div {
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 body > #__REACT__INIT__ > div[data-reactroot] {

@@ -22,7 +22,10 @@ export default class LoginForm extends React.Component {
         email: '',
         password: ''
       },
-      formValidations: {}
+      formValidations: {
+        email: true,
+        password: true
+      }
     }
   }
 
@@ -90,11 +93,9 @@ export default class LoginForm extends React.Component {
 
     return (
       <form onSubmit={this.submit} noValidate>
-        <article>
+        <div>
           <FormField
-            errorText={
-              formValidations.email === false ? `This is not a valid email` : ''
-            }
+            errorText={!formValidations.email && `This is not a valid email`}
           >
             <Input
               iconPosition="left"
@@ -103,18 +104,16 @@ export default class LoginForm extends React.Component {
               name="email"
               value={email}
               onChange={this.handleChange}
-              error={formValidations.email === false}
+              error={!formValidations.email}
+              fluid
             >
               <Icon name="at" />
               <input />
             </Input>
           </FormField>
+
           <FormField
-            errorText={
-              formValidations.password === false
-                ? `The password is too short`
-                : ''
-            }
+            errorText={!formValidations.password && `The password is too short`}
           >
             <Input
               iconPosition="left"
@@ -124,15 +123,16 @@ export default class LoginForm extends React.Component {
               hint="Complete it with your password"
               value={password}
               onChange={this.handleChange}
-              error={formValidations.password === false}
+              error={!formValidations.password}
+              fluid
             >
               <Icon name="key" />
               <input />
             </Input>
           </FormField>
-        </article>
+        </div>
 
-        <article className={style.buttonContainer}>
+        <div className={style.buttonContainer}>
           <Button
             content="Register New Account"
             onClick={this.props.onRegisterPressed}
@@ -144,7 +144,7 @@ export default class LoginForm extends React.Component {
             type="submit"
             primary
           />
-        </article>
+        </div>
       </form>
     )
   }
