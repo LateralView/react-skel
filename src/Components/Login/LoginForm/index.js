@@ -37,6 +37,10 @@ export default class LoginForm extends React.Component {
       formData: {
         ...this.state.formData,
         [e.target.name]: value
+      },
+      formValidations: {
+        ...this.state.formValidations,
+        [e.target.name]: this.validations(e)
       }
     })
   }
@@ -57,13 +61,7 @@ export default class LoginForm extends React.Component {
       }
     }
 
-    this.setState({
-      ...this.state,
-      formValidations: {
-        ...this.state.formValidations,
-        [name]: validation()
-      }
-    })
+    return validation()
   }
 
   isValid = () => {
@@ -106,8 +104,6 @@ export default class LoginForm extends React.Component {
               value={email}
               onChange={this.handleChange}
               error={formValidations.email === false}
-              onBlur={this.validations}
-              autoComplete="off"
             >
               <Icon name="at" />
               <input />
@@ -129,8 +125,6 @@ export default class LoginForm extends React.Component {
               value={password}
               onChange={this.handleChange}
               error={formValidations.password === false}
-              onBlur={this.validations}
-              autoComplete="off"
             >
               <Icon name="key" />
               <input />
