@@ -28,6 +28,8 @@
     }
   },
   "rules": {
+    "no-console":"off",
+    "no-debugger":"off",
     "no-extra-semi": 0,
     "no-mixed-spaces-and-tabs": 0,
     "jest/valid-expect": 0,
