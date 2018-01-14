@@ -46,11 +46,11 @@ export default class LoginForm extends React.Component {
           [e.target.name]: value
         }
       },
-      () => this.validations(e)
+      debounce(() => this.validations(e), 450)
     )
   }
 
-  validations = debounce(e => {
+  validations = e => {
     const { name, value } = e.target
 
     function validation() {
@@ -66,23 +66,38 @@ export default class LoginForm extends React.Component {
       }
     }
 
+    this.setState(
+      {
+        ...this.state,
+        formValidations: {
+          ...this.state.formValidations,
+          [e.target.name]: validation()
+        }
+      },
+      this.required
+    )
+  }
+
+  required = () => {
+    const { email, password } = this.state.formData
+
+    const requiredFields = !!email && !!password
+
     this.setState({
       ...this.state,
       formValidations: {
         ...this.state.formValidations,
-        [e.target.name]: validation()
+        requiredFields
       }
     })
-  }, 450)
+  }
 
   isValid = () => {
     const fieldsError = Object.values(this.state.formValidations).some(
       el => el === false
     )
-    const { email, password } = this.state.formData
-    const fieldsRequired = email && password
 
-    return !fieldsError && fieldsRequired
+    return !fieldsError
   }
 
   submit = e => {
