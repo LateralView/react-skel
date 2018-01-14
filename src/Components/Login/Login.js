@@ -24,11 +24,13 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className={style.container}>
-        <h1>Login</h1>
-        <LoginForm
-          onSubmit={this.props.onLogin}
-          onRegisterPressed={this._register}
-        />
+        <div className={style.content}>
+          <h1>Login</h1>
+          <LoginForm
+            onSubmit={this.props.onLogin}
+            onRegisterPressed={this._register}
+          />
+        </div>
       </div>
     )
   }

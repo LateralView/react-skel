@@ -1,14 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, Input, Icon } from 'semantic-ui-react'
+import { debounce } from 'underscore'
 
+// Local dependencies
 import style from './style.scss'
 import {
   validateEmail,
   validatePassword
 } from '../../../Shared/Utils/validations'
 import FormField from '../../Shared/FormField'
-import { debounce } from 'underscore'
 
 export default class LoginForm extends React.Component {
   static propTypes = {
@@ -75,13 +76,13 @@ export default class LoginForm extends React.Component {
   }, 450)
 
   isValid = () => {
-    const error = Object.values(this.state.formValidations).some(
+    const fieldsError = Object.values(this.state.formValidations).some(
       el => el === false
     )
     const { email, password } = this.state.formData
-    const required = email && password
+    const fieldsRequired = email && password
 
-    return !error && required
+    return !fieldsError && fieldsRequired
   }
 
   submit = e => {
