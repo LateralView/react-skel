@@ -8,6 +8,7 @@ import {
   validatePassword
 } from '../../../Shared/Utils/validations'
 import FormField from '../../Shared/FormField'
+import { debounce } from 'underscore'
 
 export default class LoginForm extends React.Component {
   static propTypes = {
@@ -30,49 +31,57 @@ export default class LoginForm extends React.Component {
   }
 
   handleChange = e => {
+    e.persist()
     const value =
       e.target.type === 'number' && e.target.value
         ? Number(e.target.value)
         : e.target.value
 
-    this.setState({
-      ...this.state,
-      formData: {
-        ...this.state.formData,
-        [e.target.name]: value
+    this.setState(
+      {
+        ...this.state,
+        formData: {
+          ...this.state.formData,
+          [e.target.name]: value
+        }
       },
-      formValidations: {
-        ...this.state.formValidations,
-        [e.target.name]: this.validations(e)
-      }
-    })
+      () => this.validations(e)
+    )
   }
 
-  validations = e => {
+  validations = debounce(e => {
     const { name, value } = e.target
 
     function validation() {
       switch (name) {
         case 'email':
-          return !!value && validateEmail(value)
+          return validateEmail(value)
 
         case 'password':
-          return !!value && validatePassword(value)
+          return validatePassword(value)
 
         default:
           return {}
       }
     }
 
-    return validation()
-  }
+    this.setState({
+      ...this.state,
+      formValidations: {
+        ...this.state.formValidations,
+        [e.target.name]: validation()
+      }
+    })
+  }, 450)
 
   isValid = () => {
     const error = Object.values(this.state.formValidations).some(
       el => el === false
     )
+    const { email, password } = this.state.formData
+    const required = email && password
 
-    return !error
+    return !error && required
   }
 
   submit = e => {

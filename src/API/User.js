@@ -6,7 +6,9 @@ import { METHODS, HeaderFactory } from './utils'
  * @param {string} password - Password to log into the application
  */
 export const Authenticate = (email, password) => {
-  return fetch(`${process.env.API_URL}/users/authenticate`, {
+  // return fetch(`${process.env.API_URL}/users/authenticate`, {
+  // TODO mocked api
+  return fetch(`http://demo7458754.mockable.io/login`, {
     method: METHODS.POST,
     headers: HeaderFactory(),
     body: JSON.stringify({ email, password })
