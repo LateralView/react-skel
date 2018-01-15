@@ -24,7 +24,7 @@ export default class FormField extends React.Component {
       <Form.Field className={`${style.field} ${style[pointing]}`}>
         {children}
 
-        {!!errorText && (
+        {children.props.error && (
           <Label
             basic
             color={color}

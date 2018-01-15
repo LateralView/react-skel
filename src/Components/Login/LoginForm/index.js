@@ -46,14 +46,14 @@ export default class LoginForm extends React.Component {
           [e.target.name]: value
         }
       },
-      debounce(() => this.validations(e), 450)
+      debounce(() => this.validations(e), 550)
     )
   }
 
   validations = e => {
-    const { name, value } = e.target
+    function inputValidation() {
+      const { name, value } = e.target
 
-    function validation() {
       switch (name) {
         case 'email':
           return validateEmail(value)
@@ -66,27 +66,21 @@ export default class LoginForm extends React.Component {
       }
     }
 
-    this.setState(
-      {
-        ...this.state,
-        formValidations: {
-          ...this.state.formValidations,
-          [e.target.name]: validation()
-        }
-      },
-      this.required
-    )
-  }
-
-  required = () => {
-    const { email, password } = this.state.formData
-
-    const requiredFields = !!email && !!password
-
-    this.setState({
+    const updatedState = {
       ...this.state,
       formValidations: {
         ...this.state.formValidations,
+        [e.target.name]: inputValidation()
+      }
+    }
+
+    const { name, password } = updatedState.formData
+    const requiredFields = !!name && !!password
+
+    this.setState({
+      ...updatedState,
+      formValidations: {
+        ...updatedState.formValidations,
         requiredFields
       }
     })
@@ -119,9 +113,7 @@ export default class LoginForm extends React.Component {
     return (
       <form onSubmit={this.submit} noValidate>
         <div>
-          <FormField
-            errorText={!formValidations.email && `This is not a valid email`}
-          >
+          <FormField errorText="This is not a valid email">
             <Input
               iconPosition="left"
               placeholder="Complete it with your email account"
@@ -137,9 +129,7 @@ export default class LoginForm extends React.Component {
             </Input>
           </FormField>
 
-          <FormField
-            errorText={!formValidations.password && `The password is too short`}
-          >
+          <FormField errorText="The password is too short">
             <Input
               iconPosition="left"
               placeholder="Password"
