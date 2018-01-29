@@ -15,9 +15,14 @@ router.options('*', cors())
  * the documentation of the response is here: https://developer.spotify.com/web-api/search-item/
  */
 router.get('/', (req, res) => {
+  const token = req.headers['x-access-token']
+  const authStr = 'Bearer '.concat(token)
+
   if (req.query.q && req.query.q.length > 3) {
     axios
-      .get(`https://api.spotify.com/v1/search?q=${req.query.q}&type=album`)
+      .get(`https://api.spotify.com/v1/search?q=${req.query.q}&type=album`, {
+        headers: { Authorization: authStr }
+      })
       .then(resp => res.status(resp.status).send(resp.data))
       .catch(err => res.status(err.response.status).send(err.response.data))
   } else {

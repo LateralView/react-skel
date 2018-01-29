@@ -15,8 +15,12 @@ router.options('*', cors())
  * the documentation of the response is here: https://developer.spotify.com/web-api/get-album/
  */
 router.get('/:albumId', (req, res) => {
+  const token = req.headers['x-access-token']
+  const authStr = 'Bearer '.concat(token)
   axios
-    .get(`https://api.spotify.com/v1/albums/${req.params.albumId}`)
+    .get(`https://api.spotify.com/v1/albums/${req.params.albumId}`, {
+      headers: { Authorization: authStr }
+    })
     .then(resp => res.status(resp.status).send(resp.data))
     .catch(err => res.status(err.response.status).send(err.response.data))
 })
