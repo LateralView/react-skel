@@ -30,7 +30,6 @@ The application should be fully responsive, as target from iphone 5 to desktop (
   - Jest, as Test Runner
   - Chai, as assertion Manager
   - Sinon, as Stub/Spy/Mock Library
-  - redux-saga-tester, To run smart test under sagas
 
 - Dev
   - Eslint configured with common good practices

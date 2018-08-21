@@ -11,7 +11,6 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Login from './Components/Login'
 import Home from './Components/Home'
 import Header from './Components/Header'
-import Register from './Components/Register'
 import Notifications from './Components/Notifications'
 import { OnlyPublicRoute, PrivateRoute } from './Components/Routing'
 
@@ -29,7 +28,6 @@ ReactDOM.render(
             <Header />
             <PrivateRoute exact path="/" component={Home} />
             <OnlyPublicRoute exact path="/login" component={Login} />
-            <OnlyPublicRoute exact path="/register" component={Register} />
           </div>
         </Router>
       </div>

@@ -33,8 +33,8 @@ export const actions = {
    * @param {object} response - Fetch API response
    * @param {object} payload - Fetch API Payload encoded as JSON
    */
-  AuthenticateResolved(response, payload) {
-    return ResolvedActionFactory(types.AUTHENTICATE_INTENT, response, payload)
+  AuthenticateResolved(payload) {
+    return ResolvedActionFactory(types.AUTHENTICATE_INTENT, payload)
   },
 
   /**
@@ -42,8 +42,8 @@ export const actions = {
    * @param {object} error - Fetch API response
    * @param {object} payload - Fetch API Payload encoded as JSON
    */
-  AuthenticateRejected(error, payload) {
-    return RejectedActionFactory(types.AUTHENTICATE_INTENT, error, payload)
+  AuthenticateRejected(error) {
+    return RejectedActionFactory(types.AUTHENTICATE_INTENT, error)
   },
 
   /**

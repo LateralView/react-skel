@@ -4,9 +4,8 @@
  * @param {object} response - Response object
  * @param {object} payload - Response Body
  */
-export const ResolvedActionFactory = (type, response, payload) => ({
+export const ResolvedActionFactory = (type, payload) => ({
   type: `${type}_RESOLVED`,
-  response,
   payload
 })
 

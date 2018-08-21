@@ -8,6 +8,18 @@ export default (state = {}, action) => {
         ...action.payload
       }
 
+    case `${types.AUTHENTICATE_INTENT}_RESOLVED`:
+      return {
+        ...state,
+        ...action.payload
+      }
+
+    case `${types.AUTHENTICATE_INTENT}_REJECTED`:
+      return {
+        ...state,
+        ...action.error
+      }
+
     case types.LOGOUT_INTENT:
       return {}
 

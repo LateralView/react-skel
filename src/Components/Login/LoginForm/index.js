@@ -78,10 +78,7 @@ export default class LoginForm extends React.Component {
   }
 
   _submit() {
-    this.props.onSubmit({
-      email: this.state.email,
-      password: this.state.password
-    })
+    this.props.onSubmit(this.state.email, this.state.password)
   }
 
   render() {

@@ -1,13 +1,16 @@
 import style from './style.scss'
 import React from 'react'
 import PropTypes from 'prop-types'
-import LoginForm from './LoginForm'
 import { Card, CardTitle, CardText } from 'react-toolbox/lib/card'
+
+import LoginForm from './LoginForm'
+import { Authenticate } from '../../API/User'
 
 export default class Login extends React.Component {
   static get propTypes() {
     return {
-      onLogin: PropTypes.func,
+      onLoginSuccess: PropTypes.func,
+      onLoginFailure: PropTypes.func,
       onRegister: PropTypes.func,
       history: PropTypes.object.isRequired
     }
@@ -15,11 +18,23 @@ export default class Login extends React.Component {
 
   constructor() {
     super()
-    this._register = this._register.bind(this)
+    this.onLogin = this.onLogin.bind(this)
   }
 
-  _register() {
-    this.props.history.push('/register')
+  onLogin(email, password) {
+    Authenticate(email, password)
+      .then(response => {
+        if (response.status === 200)
+          response.json().then(response => this.props.onLoginSuccess(response))
+        else {
+          const errorMessage =
+            response.status === 401
+              ? 'Invalid email or password'
+              : 'Uknown error has ocurred'
+          this.props.onLoginFailure(errorMessage)
+        }
+      })
+      .catch(error => this.props.onLoginFailure(error.message))
   }
 
   render() {
@@ -28,7 +43,7 @@ export default class Login extends React.Component {
         <Card>
           <CardTitle title="Login" subtitle="Log in With your SKEL Account" />
           <CardText>
-            <LoginForm onSubmit={this.props.onLogin} />
+            <LoginForm onSubmit={this.onLogin} />
           </CardText>
         </Card>
       </div>
