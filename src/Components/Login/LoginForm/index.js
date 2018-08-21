@@ -8,8 +8,7 @@ import { Button } from 'react-toolbox/lib/button'
 export default class LoginForm extends React.Component {
   static get propTypes() {
     return {
-      onSubmit: PropTypes.func,
-      onRegisterPressed: PropTypes.func
+      onSubmit: PropTypes.func
     }
   }
 
@@ -64,9 +63,9 @@ export default class LoginForm extends React.Component {
   }
 
   /**
-   * 
+   *
    * @param {string} email - Email Used
-   * @param {*} password 
+   * @param {*} password
    */
   _updateInputs(email, password) {
     const validations = this._validateInputs(email, password)
@@ -107,11 +106,6 @@ export default class LoginForm extends React.Component {
           />
         </article>
         <article className={style.buttonContainer}>
-          <Button
-            label="Register New Account"
-            onClick={this.props.onRegisterPressed}
-            primary
-          />
           <Button
             label="Log In"
             disabled={!this.state.isValid}

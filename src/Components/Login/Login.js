@@ -28,10 +28,7 @@ export default class Login extends React.Component {
         <Card>
           <CardTitle title="Login" subtitle="Log in With your SKEL Account" />
           <CardText>
-            <LoginForm
-              onSubmit={this.props.onLogin}
-              onRegisterPressed={this._register}
-            />
+            <LoginForm onSubmit={this.props.onLogin} />
           </CardText>
         </Card>
       </div>
