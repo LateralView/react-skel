@@ -13,7 +13,7 @@ import Home from './Components/Home'
 import Header from './Components/Header'
 import Register from './Components/Register'
 import Notifications from './Components/Notifications'
-import { PrivateRoute, OnlyPublicRoute } from './Components/Routing'
+import { OnlyPublicRoute } from './Components/Routing'
 
 const __store = store()
 const __init_el = document.createElement('div')
@@ -24,12 +24,12 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <div>
         <Notifications />
-        <Header />
         <Router>
           <div>
-            <PrivateRoute path="/" component={Home} />
-            <OnlyPublicRoute path="/login" component={Login} />
-            <OnlyPublicRoute path="/register" component={Register} />
+            <Header />
+            <OnlyPublicRoute exact path="/" component={Home} />
+            <OnlyPublicRoute exact path="/login" component={Login} />
+            <OnlyPublicRoute exact path="/register" component={Register} />
           </div>
         </Router>
       </div>
