@@ -66,19 +66,12 @@ https://developer.spotify.com/dashboard/
 - Create an App and follow the steps
 - After creating the App, a `client_id` and a `client_secret` will be provided
 
-Having that information, you can get a spotify access token following this steps:
-
-https://developer.spotify.com/documentation/general/guides/authorization-guide/
-
-
-### Authenticated requests
-Once you have the access token, you can authenticate to our endpoints adding the header:
+Once you have the keys, create `.env` file in the root directory with the following env variables:
 
 ```
-x-access-token: <spotify-access-token>
+SPOTIFY_CLIENT_ID=<client_id>
+SPOTIFY_CLIENT_SECRET=<client_secret>
 ```
-
-to each request.
 
 ### Designs
 
