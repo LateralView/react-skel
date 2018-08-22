@@ -1,4 +1,4 @@
-## A React.js Skeleton born with redux & redux-saga on mind
+## A React.js Skeleton born with redux on mind
 
 # spotify-exercise
 
@@ -43,6 +43,11 @@ The application should be fully responsive, as target from iphone 5 to desktop (
 1. Install [Docker](https://www.docker.com/) in your computer.
 1. Run `docker-compose up` and open your browser pointing to `http://localhost:3000`
    * If you want to make it run in any other port, create a `.env` file with this data: `APP_PORT=3000`, Replace 3000 with the desired port
+   
+#### Frontend
+run `npm install` to install project dependencies.
+run `npm run dev` to run the front-end.
+
 
 
 
