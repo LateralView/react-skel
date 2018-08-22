@@ -40,6 +40,7 @@ The application should be fully responsive, as target from iphone 5 to desktop (
 
   ### How to run (With Docker, Recommended)
 
+#### Backend
 1. Install [Docker](https://www.docker.com/) in your computer.
 1. Run `docker-compose up` and open your browser pointing to `http://localhost:3000`
    * If you want to make it run in any other port, create a `.env` file with this data: `APP_PORT=3000`, Replace 3000 with the desired port
@@ -48,8 +49,36 @@ The application should be fully responsive, as target from iphone 5 to desktop (
 1. run `npm install` to install project dependencies.
 2. run `npm run dev` to run the front-end.
 
+### Endpoints
+The backend exposes the following endpoints:
+
+- GET /search?q=:searchPayload    -> Returns a filtered list
+- GET /album/:albumId             -> Returns album details
+- GET /comments/:albumId          -> Returns album comments
+- POST /comments                  -> Create a new comment
+    - Body: { albumId: String, email: String, text: String }
+
+### Spotify credentials
+To comunicate to Spotify through our backend, you must have a Spotify access token. To get this access token, login in:
+
+https://developer.spotify.com/dashboard/
+
+- Create an App and follow the steps
+- After creating the App, a `client_id` and a `client_secret` will be provided
+
+Having that information, you can get a spotify access token following this steps:
+
+https://developer.spotify.com/documentation/general/guides/authorization-guide/
 
 
+### Authenticated requests
+Once you have the access token, you can authenticate to our endpoints adding the header:
+
+```
+x-access-token: <spotify-access-token>
+```
+
+to each request.
 
 ### Designs
 
