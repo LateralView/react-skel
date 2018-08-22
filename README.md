@@ -1,4 +1,4 @@
-## A React.js Skeleton born with redux & redux-saga on mind
+## A React.js Skeleton born with redux & redux-saga in mind
 
 # spotify-exercise
 
@@ -8,7 +8,7 @@ This exercise is made to test your abilities to solve a typical frontend issue.
 
 ### Context
 
-Basically, you'll need to connect to spotify api to be able to do album searchs, then from our backend show the current comments, allowing the user to put a comment on a album. 
+Basically, you'll need to connect to spotify API to be able to do album search, then from our backend show the current comments, allowing the user to put a comment on a album. 
 The application should be fully responsive, as target from iphone 5 to desktop (1080p).
 
 
@@ -41,10 +41,15 @@ The application should be fully responsive, as target from iphone 5 to desktop (
 
   ### How to run (With Docker, Recommended)
 
+#### Backend
+
 1. Install [Docker](https://www.docker.com/) in your computer.
 1. Run `docker-compose up` and open your browser pointing to `http://localhost:3000`
    * If you want to make it run in any other port, create a `.env` file with this data: `APP_PORT=3000`, Replace 3000 with the desired port
 
+#### Frontend
+1. run `npm install` to install project dependencies.
+2. run `npm run dev` to run the front-end.
 
 
 ### Designs
