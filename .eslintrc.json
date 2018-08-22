@@ -4,24 +4,18 @@
     "node": true,
     "browser": true
   },
-  "plugins": [
-    "prettier"
-  ],
   "extends": "eslint:recommended",
   "parserOptions": {
-      "sourceType": "module"
+      "sourceType": "module",
+      "ecmaVersion": 8,
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true
+      }
   },
   "rules": {
     "no-extra-semi": 0,
     "no-mixed-spaces-and-tabs": 0,
     "jest/valid-expect": 0,
-    "linebreak-style": ["error", "unix"],
-    "prettier/prettier": [
-      "warn",
-      {
-        "singleQuote": true,
-        "semi": false
-      }
-    ]
+    "linebreak-style": ["error", "unix"]
   }
 }

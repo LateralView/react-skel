@@ -2,6 +2,7 @@ const cors = require('cors')
 const axios = require('axios')
 const express = require('express')
 const router = express.Router()
+const authHelper = require('./helpers/authHelper')
 
 router.options('*', cors())
 
@@ -14,8 +15,9 @@ router.options('*', cors())
  * @apiDescription This is just a proxy between the local server and the real Spotify api,
  * the documentation of the response is here: https://developer.spotify.com/web-api/search-item/
  */
-router.get('/', (req, res) => {
-  const token = req.headers['x-access-token']
+router.get('/', async (req, res) => {
+  // const token = req.headers['x-access-token']
+  const token = await authHelper.getToken()
   const authStr = 'Bearer '.concat(token)
 
   if (req.query.q && req.query.q.length > 3) {
