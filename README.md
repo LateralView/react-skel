@@ -45,8 +45,8 @@ The application should be fully responsive, as target from iphone 5 to desktop (
    * If you want to make it run in any other port, create a `.env` file with this data: `APP_PORT=3000`, Replace 3000 with the desired port
    
 #### Frontend
-run `npm install` to install project dependencies.
-run `npm run dev` to run the front-end.
+1. run `npm install` to install project dependencies.
+2. run `npm run dev` to run the front-end.
 
 
 
