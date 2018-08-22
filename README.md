@@ -25,7 +25,7 @@ The application should be fully responsive, as target from iphone 5 to desktop (
   - normalize.css
   - React Router v4
 
-- Use Redux as State Manager, and Redux-Saga as Side Effect Manager
+- Use Redux as State Manager
 - Unit Test Stack:
   - Jest, as Test Runner
   - Chai, as assertion Manager
