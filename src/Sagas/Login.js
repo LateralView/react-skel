@@ -6,7 +6,7 @@ import { actions as NotificationActions } from '../Actions/Notifications'
 
 /**
  * Handles Login intent
- * @param {object} action - Action Object 
+ * @param {object} action - Action Object
  */
 function* loginHandler({ data }) {
   try {
