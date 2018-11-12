@@ -27,9 +27,9 @@ ReactDOM.render(
         <Header />
         <Router>
           <div>
-            <PrivateRoute path="/" component={Home} />
-            <OnlyPublicRoute path="/login" component={Login} />
-            <OnlyPublicRoute path="/register" component={Register} />
+            <PrivateRoute exact path="/" component={Home} />
+            <OnlyPublicRoute exact path="/login" component={Login} />
+            <OnlyPublicRoute exact path="/register" component={Register} />
           </div>
         </Router>
       </div>
